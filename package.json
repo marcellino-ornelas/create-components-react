@@ -1,0 +1,18 @@
+{
+  "name": "create-react-component",
+  "version": "1.0.0",
+  "description": "short cut to create a component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "bin": {
+    "react-component": "./index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "fs-extra": "^5.0.0"
+  }
+}
