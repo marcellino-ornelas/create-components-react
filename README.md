@@ -10,4 +10,4 @@ This module will create a react component and css file for a react project.
 4. run "npm install -g" command in terminal.
 
 ## Usages
-run "react-component \<Component Name\>". This will make a js and css file in your current working directory.
+Change your directory into a react project and run "react-component \<Component Name\>". This will make a js and css file in your current working directory.
