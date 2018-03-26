@@ -1,16 +1,21 @@
 {
   "name": "create-react-component",
   "version": "1.0.0",
-  "description": "short cut to create a component",
+  "description": "Short cut to create a react component",
   "main": "index.js",
   "scripts": {
+    "start": "echo \"Should be installed globally \" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Marcellino Ornelas",
   "bin": {
     "react-component": "./index.js"
   },
   "license": "ISC",
+  "engines": {
+    "node": ">=6.13.1"
+  },
+  "homepage": "https://github.com/marcellino-ornelas/create-react-component",
   "dependencies": {
     "async": "^2.6.0",
     "fs-extra": "^5.0.0"

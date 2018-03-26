@@ -22,3 +22,4 @@ or
 
 `react-component header/Header`
 will create  a folder header with Header.js and Header.css inside
+
