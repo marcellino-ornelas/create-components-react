@@ -1,4 +1,4 @@
-# create-react-component
+# create--components-react
 
 ## Description
 This module will create a react component and css file for a react project.
