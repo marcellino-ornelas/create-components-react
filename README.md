@@ -20,3 +20,8 @@ or
 `react-component header/Header`
 will create  a folder header with Header.js and Header.css inside
 
+or
+
+you can also chain components names
+`react-component <Component Name> <Component Name> <Component Name>`
+
