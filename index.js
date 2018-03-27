@@ -11,8 +11,6 @@ program
   .version('0.1.0')
   .parse(process.argv);
 
-// console.dir(program);
-
 // Create component files
 createReactComponent( process.cwd(), program.args );
 
