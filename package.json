@@ -18,6 +18,7 @@
   "homepage": "https://github.com/marcellino-ornelas/create-react-component",
   "dependencies": {
     "async": "^2.6.0",
+    "commander": "^2.15.1",
     "fs-extra": "^5.0.0"
   }
 }
