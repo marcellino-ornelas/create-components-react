@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "echo \"Should be installed globally \" && exit 1",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/"
   },
   "author": "Marcellino Ornelas",
   "bin": {
@@ -19,7 +19,14 @@
   "dependencies": {
     "async": "^2.6.0",
     "commander": "^2.15.1",
+    "filenamify": "^2.1.0",
     "fs-extra": "^5.0.0",
-    "ispromise": "^1.1.0"
+    "is-valid-path": "^0.1.1",
+    "ispromise": "^1.1.0",
+    "valid-filename": "^2.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   }
 }
