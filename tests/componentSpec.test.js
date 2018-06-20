@@ -43,7 +43,7 @@ describe('Component', function() {
       expect( component.fileStructure ).to.have.lengthOf( MAX_FILES_FOR_COMPONENTS );
     });
 
-  });
+  }); // initialization
 
   describe('Creation', function() {
     describe('normal', function() {
@@ -58,7 +58,6 @@ describe('Component', function() {
       });
 
       it('should create a new component structure', function(done) {
-        console.log(component)
         expect( component.dir ).to.equal( path.join(__dirname, 'App') )
         fs.pathExists( component.dir, function(err, exists){
 
@@ -67,13 +66,36 @@ describe('Component', function() {
         })
       });
 
-      it('should have a index.js file', function() {});
-      it('should have a js file named from component name', function() {});
-      it('should contain a css file named from component name', function() {});
+      it('should have a index.js file', function(done) {
 
+        fs.pathExists( path.join(component.dir, 'index.js') , function(err, exists){
 
+          done(err || !exists);
 
-    });
-  });
+        });
 
-});
+      });
+
+      it('should have a js file named from component name', function(done) {
+        fs.pathExists( path.join(component.dir, component.name + '.js') , function(err, exists){
+
+          done(err || !exists);
+
+        });
+      });
+
+      it('should contain a css file named from component name', function(done) {
+        fs.pathExists( path.join(component.dir,  component.name + '.css') , function(err, exists){
+
+          done(err || !exists);
+
+        });
+      });
+
+    }); //Normal
+
+    // describe('advanced', function(){}); // describe
+
+  }); // Creation
+
+}); // Component
