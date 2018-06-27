@@ -44,7 +44,7 @@ or
 
 you can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
 
-`react-component Nav/NavItem SideBar SideBar/SideBarItem` will create a NavItem component folder in Nav folder
+`react-component Nav/NavItem SideBar SideBar/SideBarItem`
 
     Nav
     | -- NavItem
