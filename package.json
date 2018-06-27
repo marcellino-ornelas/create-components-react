@@ -1,6 +1,6 @@
 {
   "name": "create-components-react",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Short cut to create a react component",
   "main": "index.js",
   "scripts": {
