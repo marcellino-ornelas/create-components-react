@@ -14,26 +14,26 @@ Change your directory into a react project and run `react-component <ComponentNa
 
 `react-component App`
 will create App component folder in your current working directory
-` App
-  |--- App.js
-  |
-  |--- App.css
-  |
-  |--- index.js
-`
+    
+    App
+      |--- App.js
+      |
+      |--- App.css
+      |
+      |--- index.js
+
 or
 
 `react-component Nav/NavItem`
 will create a NavItem component folder in Nav folder
 
-` Nav
-  | -- NavItem
+    Nav
+    | -- NavItem
       |--- NavItem.js
       |
       |--- NavItem.css
       |        
       |--- index.js
-`
 
 
 you can also chain components names
