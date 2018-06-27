@@ -1,19 +1,25 @@
 # create-components-react
 
+
 ## Description
-This module will create a react component folder. This will include a `<componentName>.js`, `<componentName>.css`, and <`index.js`. 
+
+This module will create a react component folder in your current working directory.
+
 
 ## Set Up
+
 `npm install -g create-components-react`
 
+
 ## Usages
-Change your directory into a react project and run `react-component <ComponentName>`. This will make a js and css file in your current working directory.
+
+Run `react-component <ComponentName>`. This will create a react component folder. This will include a `<ComponentName>.js`, `<ComponentName>.css`, and `index.js`. 
+
 
 
 ## examples
 
-`react-component App`
-will create App component folder in your current working directory
+`react-component App` will create App component folder in your current working directory
     
     App
       |--- App.js
@@ -24,20 +30,46 @@ will create App component folder in your current working directory
 
 or
 
-`react-component Nav/NavItem`
-will create a NavItem component folder in Nav folder
+`react-component Nav/NavItem` will create a NavItem component folder in Nav folder
 
     Nav
     | -- NavItem
-      |--- NavItem.js
-      |
-      |--- NavItem.css
-      |        
-      |--- index.js
+        |
+        |--- NavItem.js
+        |
+        |--- NavItem.css
+        |        
+        |--- index.js
 
 
-you can also chain components names
-`react-component <ComponentName> <ComponentName> <ComponentName>`
+you can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
+
+`react-component Nav/NavItem SideBar SideBar/SideBarItem` will create a NavItem component folder in Nav folder
+
+    Nav
+    | -- NavItem
+    |  |
+    |  |--- NavItem.js
+    |  |
+    |  |--- NavItem.css
+    |  |        
+    |  |--- index.js
+    |
+    sideBar
+    |
+    |-- SideBar.js
+    |
+    |--SideBar.css
+    |
+    |--index.js
+    |
+    | -- sideBarItem
+        |
+        |--- sideBarItem.js
+        |
+        |--- sideBarItem.css
+        |        
+        |--- index.js
 
 
 ## Tips
