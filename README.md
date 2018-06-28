@@ -59,22 +59,22 @@ you can also chain components names `react-component <ComponentName> <ComponentN
     |
     |-- SideBar.js
     |
-    |--SideBar.css
+    |-- SideBar.css
     |
-    |--index.js
+    |-- index.js
     |
-    | -- sideBarItem
+    | -- SideBarItem
         |
-        |--- sideBarItem.js
+        |--- SideBarItem.js
         |
-        |--- sideBarItem.css
+        |--- SideBarItem.css
         |        
         |--- index.js
 
 
 ## Tips
 
-Create Components React assumes that you want all path to a component name and the component name itself first character to be capitail. If you input a component name or any paths that use lower case chars it will turn itself to a capatailized version. Examples: 
+Create Components React assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples: 
 
 `app` will turn into `App`
 
