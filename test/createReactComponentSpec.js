@@ -9,8 +9,6 @@ const async = require('async');
 const child = require('child_process');
 
 const cwd = __dirname;
-// const FILE_EXECUTE_PATH = path.join(__dirname, '..');
-// console.log(FILE_EXECUTE_PATH)
 
 function spawn(args,done){
     child.execFile(`node`, ['../index.js'].concat(args), {
@@ -19,10 +17,6 @@ function spawn(args,done){
       done(err);
     });
 }
-
-// function deleteFile( name, done ){
-//   fs.remove( name, done);
-// }
 
 describe('Create React Component', function(){
 
@@ -52,25 +46,7 @@ describe('Create React Component', function(){
 
   }) //Basic
 
-  // describe('Arguments',function(){
-
-  //   before(function(done){
-  //     spawn(['Nav', 'App'], done);
-  //   })
-
-  //   after(function(done){
-  //     // delete file here
-  //     deleteFile('App', done);
-  //   });
-  // })
-
-  // it('Should make a component with provided argument',function( done ){
-  //   spawn(['App'], function(){
-
-  //   });
-  // });
-
-// });
+});
 
 
 
