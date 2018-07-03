@@ -42,7 +42,7 @@ describe('Create React Component', function(){
           done(err);
       });
 
-     });
+    });
 
   }) //Basic
 
