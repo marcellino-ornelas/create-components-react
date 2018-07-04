@@ -1,0 +1,6 @@
+{
+  "settings_path": "../settings.json",
+  "settings": {
+    "css": ".css"
+  }
+}
