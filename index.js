@@ -21,8 +21,6 @@ program
 //     console.log('args in set: ', arguments);
 //   });
 
-settings.init();
-
 const createReactComponent = require("./lib");
 
 program
