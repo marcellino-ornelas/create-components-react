@@ -6,6 +6,12 @@
 
 const program = require('commander');
 const settings = require('./lib/settings');
+const fs = require('fs-extra');
+const path = require('path');
+
+const CWD = process.cwd();
+
+console.log('Current working directory: ', CWD);
 
 program
   .version('2.0.3')
@@ -25,8 +31,8 @@ const createReactComponents = require('./lib');
 program
   .command('init')
   .description('create local configuration settings for a repo to use')
-  .action(function(prop, value, options) {
-    console.log('initialize');
+  .action(function(options) {
+    createReactComponents.initailizeLocalSettings(CWD);
   });
 
 program
@@ -35,16 +41,12 @@ program
   .description('create a new component')
   .action(function(files, options) {
     // console.log('args in create: ', options.args);
-    createReactComponents(process.cwd(), files);
+    createReactComponents(CWD, files);
   });
 
 program.command('* <components...>').action(function(files, options) {
   // console.log('args in *: ', options);
-  createReactComponents(process.cwd(), files);
+  createReactComponents(CWD, files);
 });
 
 program.parse(process.argv);
-
-// console.log('anything else')
-// Create component files
-// createReactComponent( process.cwd(), program.args);
