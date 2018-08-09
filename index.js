@@ -16,6 +16,8 @@ console.log('Current working directory: ', CWD);
 program
   .version('2.0.3')
   .option('-c, --css <ext>', 'change extention for css file');
+// .option('-e, --exclude <ext>', 'change extention for css file');
+// .option('-o, --only <ext>', 'change extention for css file');
 
 /*
  * future
