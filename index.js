@@ -13,15 +13,27 @@ const CWD = process.cwd();
 
 console.log('Current working directory: ', CWD);
 
+// settings.set('cwd', CWD, true);
+
+function optionsToSettings(_program) {
+  // console.log(_program .options);
+  _program.options.forEach(function(option) {
+    var prop = option.attributeName();
+    settings.set(prop, _program[prop]);
+  });
+}
+
 program
   .version('2.0.3')
-  .option('-c, --css <ext>', 'change extention for css file');
-// .option('-e, --exclude <ext>', 'change extention for css file');
-// .option('-o, --only <ext>', 'change extention for css file');
+  .option('-c, --css-type <ext>', 'change extention for css file', 'css')
+  .option('-n, --no-css', 'dont include a css for the components you create');
 
 /*
  * future
 */
+// .option('-e, --exclude <ext>', 'change extention for css file');
+// .option('-o, --only <ext>', 'change extention for css file');
+
 // program.command('set <prop> <value>')
 //   .description('set a global setting')
 //   .action(function( prop, value, options){
@@ -32,9 +44,17 @@ const createReactComponents = require('./lib');
 
 program
   .command('init')
+  .option(
+    '-t, --templates',
+    'Configure this repo to use template functionality'
+  )
   .description('create local configuration settings for a repo to use')
   .action(function(options) {
-    createReactComponents.initailizeLocalSettings(CWD);
+    var initProgress = createReactComponents.initializeLocalSettings(CWD);
+
+    if (options.templates) {
+      initProgress.then(createReactComponents.initializeTemplates(CWD));
+    }
   });
 
 program
@@ -42,7 +62,6 @@ program
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    // console.log('args in create: ', options.args);
     createReactComponents(CWD, files);
   });
 
@@ -52,3 +71,5 @@ program.command('* <components...>').action(function(files, options) {
 });
 
 program.parse(process.argv);
+
+optionsToSettings(program);

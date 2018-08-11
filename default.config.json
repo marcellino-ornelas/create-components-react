@@ -1,6 +1,8 @@
 {
   "settings_path": "../settings.json",
   "settings": {
-    "css": "css"
+    "css": true,
+    "cssType": "css",
+    "templates": false
   }
 }
