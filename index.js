@@ -23,10 +23,7 @@ function optionsToSettings(_program) {
   });
 }
 
-program
-  .version('2.0.3')
-  .option('-c, --css-type <ext>', 'change extention for css file', 'css')
-  .option('-n, --no-css', 'dont include a css for the components you create');
+program.version('2.0.3');
 
 /*
  * future
@@ -59,17 +56,26 @@ program
 
 program
   .command('create <components...>')
+  // .option('-p, --include-package <packages...>')
+  .option('-c, --css-type <ext>', 'change extention for css file', 'css')
+  .option('-i, --no-index')
+  .option('-t, --no-test')
+  .option('-n, --no-css', 'dont include a css for the components you create')
+  .option('-d, --no-default <ext>', 'change extention for css file', 'css')
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    createReactComponents(CWD, files);
+    console.log(options.css);
+    // optionsToSettings(options);
+    // console.log
+    // createReactComponents(CWD, files);
   });
 
-program.command('* <components...>').action(function(files, options) {
-  // console.log('args in *: ', options);
-  createReactComponents(CWD, files);
-});
+// program.command('* <components...>').action(function(files, options) {
+//   // console.log('args in *: ', options);
+//   createReactComponents(CWD, files);
+// });
 
 program.parse(process.argv);
 
-optionsToSettings(program);
+// optionsToSettings(program);
