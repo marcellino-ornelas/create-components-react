@@ -1,1 +1,1 @@
-This is my storage file ./{{= name}}
+This is my storage file './{{= it.component.name}}'

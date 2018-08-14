@@ -68,12 +68,12 @@ program
     console.log(options.css);
     // optionsToSettings(options);
     // console.log
-    // createReactComponents(CWD, files);
+    createReactComponents(CWD, files);
   });
 
 // program.command('* <components...>').action(function(files, options) {
 //   // console.log('args in *: ', options);
-//   createReactComponents(CWD, files);
+// createReactComponents(CWD, files);
 // });
 
 program.parse(process.argv);
