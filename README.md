@@ -4,17 +4,66 @@
 
 This module will create a react component folder in your current working directory.
 
-## Set Up
+## Install
 
 `npm install -g create-components-react`
 
-## Usages
+## Create
 
-Run `react-component <ComponentName>`. This will create a react component folder. This will include a `<ComponentName>.js`, `<ComponentName>.css`, and `index.js`.
+This will create a react component folder that will include a `<ComponentName>.js`, `<ComponentName>.css`, and `index.js`.
+
+### Usages
+
+`react-component create [flags] <ComponentName...>`.
+
+### Flags
+
+<table>
+    <thead>
+        <tr>
+            <th>Flag</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-c, --css-type <ext> </td>
+            <td>css</td>
+            <td>change extention for css file</td>
+        </tr>
+        <tr>
+            <td>-t, --no-test</td>
+            <td>fasle</td>
+            <td>dont include a testing file for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>-n, --no-css</td>
+            <td>fasle</td>
+            <td>dont include a css file for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>-i, --no-index</td>
+            <td>fasle</td>
+            <td>dont include a index for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>-d, --no-default</td>
+            <td>fasle</td>
+            <td>dont include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
+        </tr>
+        <!-- impliment -->
+        <!-- <tr>
+            <td>-p, --packages</td>
+            <td>default</td>
+            <td>dont include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
+        </tr> -->
+    </tbody>
+</table>
 
 ### examples
 
-`react-component App` will create App component folder in your current working directory
+`react-component create App` will create App component folder in your current working directory
 
     App
     |--- App.js
@@ -25,7 +74,7 @@ Run `react-component <ComponentName>`. This will create a react component folder
 
 or
 
-`react-component Nav/NavItem` will create a NavItem component folder in Nav folder
+`react-component create Nav/NavItem` will create a NavItem component folder in Nav folder
 
     Nav
     | -- NavItem
@@ -38,7 +87,7 @@ or
 
 you can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
 
-    react-component Nav/NavItem SideBar SideBar/SideBarItem
+    react-component create Nav/NavItem SideBar SideBar/SideBarItem
 
     Nav
     | -- NavItem
@@ -65,7 +114,7 @@ you can also chain components names `react-component <ComponentName> <ComponentN
         |
         |--- index.js
 
-## Tips
+### Tips
 
 Create Components React assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
 
@@ -217,7 +266,7 @@ open `component/component.dot` and you should see something like this.
 
 `component/component.dot` is the default template to make each component file. You now can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can now use the `create` command and each component created will now take on the new look of the template file you updated.
 
-Edit `component/component.dot` to render a component that doesnt include any life cycle methods and always uses the constructor function. Now your file should look like this:
+Example: edit `component/component.dot` to render a component that doesnt include any life cycle methods and always uses the constructor function. Now your file should look like this:
 
         import React, { Component } from 'react';
         {{? it.component.useCSS }}
@@ -237,6 +286,34 @@ Edit `component/component.dot` to render a component that doesnt include any lif
           }
         }
         export default {{= it.component.name}};
+
+Now when you execute `react-components create App` it should make a directory like this:
+
+        Repo Folder
+        | - .ccr
+            | - ...
+        | _ App
+            | - App.js
+            | - index.js
+            | - style.css
+
+This doesnt look to different than the default version right? Dont be disappointed to fast. Lets take a look at `App.js`. This file is create from the `component/component.dot` so if we have all our configurations right, it should now look like this:
+
+    import React, { Component } from 'react';
+
+    class App extends Component {
+      constructor(props){
+        super(props);
+        this.state = {};
+      }
+
+      render() {
+        return (
+          <div></div>
+        );
+      }
+    }
+    export default App;
 
 <!-- ## Create
 CAC DSV
