@@ -9,7 +9,6 @@ const Component = require('../lib/component');
 const expect = chai.expect;
 
 const TESTING_ENV = __dirname;
-const MAX_FILES_FOR_COMPONENTS = 3;
 
 describe('Component', function() {
   describe('initialization', function() {
