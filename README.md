@@ -1,4 +1,4 @@
-# create-components-react
+# Create Componentseact
 
 ## Description
 
@@ -10,11 +10,29 @@ This module will create a react component folder in your current working directo
 
 ## Create
 
+---
+
+### Description
+
 This will create a react component folder that will include a `<ComponentName>.js`, `<ComponentName>.css`, and `index.js`.
 
-### Usages
+> Note: If the directory to the component doesnt exist, create-components-react will make it for you.
 
-`react-component create [flags] <ComponentName...>`.
+---
+
+### Syntax
+
+`react-component create [flags] ComponentName [ComponentName[, ...]]`
+
+#### Parameters
+
+`[flags]` (optional) flags to change the behavior of create.
+
+`ComponentName` (required) Name of the component you would like to create.
+
+`[ComponentName[, ...]]` (optional)
+
+---
 
 ### Flags
 
@@ -34,22 +52,22 @@ This will create a react component folder that will include a `<ComponentName>.j
         </tr>
         <tr>
             <td>-t, --no-test</td>
-            <td>fasle</td>
+            <td>false</td>
             <td>dont include a testing file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-n, --no-css</td>
-            <td>fasle</td>
+            <td>false</td>
             <td>dont include a css file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-i, --no-index</td>
-            <td>fasle</td>
+            <td>false</td>
             <td>dont include a index for the component(s) you create</td>
         </tr>
         <tr>
             <td>-d, --no-default</td>
-            <td>fasle</td>
+            <td>false</td>
             <td>dont include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
         </tr>
         <!-- impliment -->
@@ -61,7 +79,9 @@ This will create a react component folder that will include a `<ComponentName>.j
     </tbody>
 </table>
 
-### examples
+---
+
+### Examples
 
 `react-component create App` will create App component folder in your current working directory
 
@@ -74,7 +94,7 @@ This will create a react component folder that will include a `<ComponentName>.j
 
 or
 
-`react-component create Nav/NavItem` will create a NavItem component folder in Nav folder
+`react-component create Nav/NavItem` will create a NavItem component folder in Nav folder.
 
     Nav
     | -- NavItem
@@ -114,6 +134,8 @@ you can also chain components names `react-component <ComponentName> <ComponentN
         |
         |--- index.js
 
+---
+
 ### Tips
 
 Create Components React assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
@@ -124,17 +146,27 @@ Create Components React assumes that you want all paths to a component and the c
 
 ## Settings
 
+---
+
+### Description
+
 create-components-react gives you the capability to make localized settings for each repo you wish to chose. These setting will change the behavior of how create-components-react functions. These settings would be like using the flags in the command line but it will be apply everytime a react component is made.
+
+---
 
 ### Usage
 
     react-components init [flags]
+
+---
 
 ### Flags
 
 -   `-t, --templates` Initialize create-components react to use templates functionality
 
 > Note: It is recommended to initailize the settings in your repos root directory.
+
+---
 
 ### Examples
 
@@ -152,9 +184,15 @@ This will create a `.ccr` folder with `settings.json` file inside it.
 
 ## Templating
 
+---
+
+### Description
+
 This feature allows a user to construct how of each file of a component should render within a repo. This gives the ability for a user to modify or add to the structure of a component and the files it should include.
 
 > Note: create-compoents-react uses a templating engine to compile and render the files. More documentation on how to use the templating engine can be found [here](http://olado.github.io/doT/index.html)
+
+---
 
 ### Usage
 
@@ -167,6 +205,10 @@ This will only make templating folder to use. you can initialize this with the s
     react-component init -t
 
 This will initialize local settings and local templating.
+
+---
+
+### doT
 
 The doT templating language uses `{{}}` for inertoplation and javascript execution. Here are some basic uses of doT:
 
@@ -202,9 +244,38 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
     </tbody>
 </table>
 
+---
+
 ### Flags
 
 No flags for Templating
+
+---
+
+### Packages
+
+    | - templates
+            | - component
+            |   | - component.dot
+            |
+            | - index
+            |   | - index.dot
+            |
+            | - style
+            |   | - style.css.dot
+            |
+            | - settings.json
+
+Lets give you some basic info on how templating works. When you initialize templating in create-components -react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
+
+You also are allowed to add your own packages to use throughout the repo. These packages can have directories and/or dot files for rendering inside. each directory( even nested ones!) and all files will be made to the destination. To add custom packages create a new folder inside `.ccr/templates`. The name of the folder will be the package name. Inside your custom package folder create a file(s) and/or directory(s). Each file inside that you would like to have rendered with templating should include a `.dot` extention at the end of the file.
+If the only extention to your file is a `.dot` extention then will be rendered as a '.js' file. If you would like to have another type of extention include it before the `.dot` extention.
+
+Example to create a css file: `someFileName.css.dot`
+
+> Review Create flags section for a full list of all flags.
+
+---
 
 ### Examples
 
