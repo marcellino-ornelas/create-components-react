@@ -4,6 +4,7 @@
 
 const chai = require('chai');
 const path = require('path');
+const async = require('async');
 const Template = require('../lib/template');
 
 const fs = require('fs-extra');
@@ -14,6 +15,8 @@ const Component = require('../lib/component');
 const expect = chai.expect;
 
 const packages = ['index', 'component', 'style'];
+
+const testingComponents = ['App'];
 
 const TEMPLATES_PATH = path.join(__dirname, '../templates/');
 const TESTING_ENV = __dirname;
@@ -47,11 +50,12 @@ describe('Templates', function() {
 
   describe('rendering', function() {
     before(function(done) {
+      var component = new Component(TEMPLATES_DEST_PATH, 'App');
       template.render(
-        TEMPLATES_DEST_PATH,
+        component.dir,
         {
           settings: settings._config,
-          component: new Component(TEMPLATES_DEST_PATH, 'App')
+          component: component
         },
         done
       );
@@ -61,6 +65,108 @@ describe('Templates', function() {
       fs.remove(TEMPLATES_DEST_PATH, done);
     });
 
+    it('should render the correct number of files', function(done) {
+      // Make the files with there paths for each component
+      checkFilesExists(
+        TEMPLATES_DEST_PATH,
+        testingComponents,
+        ['index.js', 'component.js', 'style.css'],
+        done
+      );
+    });
+
+    // it('should process', function() {});
+
+    // it('should ', function() {});
+    // it('should ', function() {});
+
     // it('should should render correct number of files', function() {});
   });
+
+  describe('plugins', function() {
+    before(function(done) {
+      settings.set('css', 'less');
+      template.plugin({
+        process: [
+          {
+            match: /\.css$/,
+            ext: settings.get('css'),
+            name: function(data) {
+              return data.component.name;
+            }
+          },
+          {
+            match: /^component/,
+            name: function(data) {
+              return data.component.name;
+            }
+          }
+        ]
+      });
+
+      const component = new Component(TEMPLATES_DEST_PATH, 'App');
+
+      template.render(
+        component.dir,
+        {
+          settings: settings._config,
+          component: component
+        },
+        done
+      );
+    });
+
+    // after(function(done) {
+    //   fs.remove(TEMPLATES_DEST_PATH, done);
+    // });
+
+    it('should render the correct number of files', function(done) {
+      // Make the files with there paths for each component
+      checkFilesExists(
+        TEMPLATES_DEST_PATH,
+        testingComponents,
+        ['index.js', 'App.js', 'App.less'],
+        done
+      );
+    });
+
+    // it('should process', function() {});
+
+    // it('should ', function() {});
+    // it('should ', function() {});
+
+    // it('should should render correct number of files', function() {});
+  }); // plugins
 }); // Templates
+
+function makeComponentFiles(dest, components, files) {
+  return components.map(function(component_path) {
+    return files.map(function(file) {
+      return path.join(dest, component_path, file);
+    });
+  });
+}
+
+function checkFilesExists(dest, components, files, done) {
+  const renderedFiles = makeComponentFiles(dest, components, files);
+
+  async.each(
+    renderedFiles,
+    function(files, next) {
+      async.each(
+        files,
+        function(file, nextInner) {
+          fs.pathExists(file, function(err, exists) {
+            err =
+              err || !exists
+                ? new Error('File:' + file + ' Doesnt exists')
+                : null;
+            nextInner(err);
+          });
+        },
+        next
+      );
+    },
+    done
+  );
+}
