@@ -2,7 +2,9 @@
   "settings_path": "../settings.json",
   "settings": {
     "css": true,
+    "index":true,
     "cssType": "css",
-    "templates": false
+    "templates": false,
+    "extendCwd": ""
   }
 }

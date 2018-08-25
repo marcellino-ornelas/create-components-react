@@ -11,7 +11,8 @@ const fs = require('fs-extra');
 
 const settings = require('../lib/settings');
 const Component = require('../lib/component');
-
+const reactAdapter = require('../lib/react-plugin')(settings._config);
+console.log(reactAdapter, settings._config);
 const expect = chai.expect;
 
 const packages = ['index', 'component', 'style'];
@@ -19,12 +20,12 @@ const packages = ['index', 'component', 'style'];
 const testingComponents = ['App'];
 
 const TEMPLATES_PATH = path.join(__dirname, '../templates/');
-const TESTING_ENV = __dirname;
 const TEMPLATES_DEST_PATH = path.join(__dirname, './testing-env');
 
 describe('Templates', function() {
   before(function() {
-    template = new Template(TEMPLATES_PATH, packages);
+    template = new Template(TEMPLATES_PATH, reactAdapter.packages);
+    console.log(template);
   });
 
   describe('initialization', function() {
@@ -83,26 +84,10 @@ describe('Templates', function() {
     // it('should should render correct number of files', function() {});
   });
 
-  describe('plugins', function() {
+  describe('adapter', function() {
     before(function(done) {
-      settings.set('css', 'less');
-      template.plugin({
-        process: [
-          {
-            match: /\.css$/,
-            ext: settings.get('css'),
-            name: function(data) {
-              return data.component.name;
-            }
-          },
-          {
-            match: /^component/,
-            name: function(data) {
-              return data.component.name;
-            }
-          }
-        ]
-      });
+      settings.set('cssType', 'less');
+      template.adapter(reactAdapter.process);
 
       const component = new Component(TEMPLATES_DEST_PATH, 'App');
 
@@ -116,9 +101,9 @@ describe('Templates', function() {
       );
     });
 
-    // after(function(done) {
-    //   fs.remove(TEMPLATES_DEST_PATH, done);
-    // });
+    after(function(done) {
+      fs.remove(TEMPLATES_DEST_PATH, done);
+    });
 
     it('should render the correct number of files', function(done) {
       // Make the files with there paths for each component
