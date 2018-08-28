@@ -16,7 +16,7 @@ console.log('Current working directory: ', CWD);
 // settings.set('cwd', CWD, true);
 
 function optionsToSettings(_program) {
-  // console.log(_program .options);
+  // console.log('optiomns to settings:', options);
   _program.options.forEach(function(option) {
     var prop = option.attributeName();
     settings.set(prop, _program[prop]);
@@ -50,6 +50,7 @@ program
     var initProgress = createReactComponents.initializeLocalSettings(CWD);
 
     if (options.templates) {
+      settings.set('templates', true);
       initProgress.then(createReactComponents.initializeTemplates(CWD));
     }
   });
@@ -58,23 +59,31 @@ program
   .command('create <components...>')
   // .option('-p, --include-package <packages...>')
   .option('-c, --css-type <ext>', 'change extention for css file', 'css')
-  .option('-i, --no-index')
-  .option('-t, --no-test')
+  .option(
+    '-f, --functional',
+    'use functional component instead of a state component'
+  )
+  .option(
+    '-i, --no-index',
+    'dont include default index file for the components you create'
+  )
+  .option(
+    '-t, --no-test',
+    'dont include a testing file for the components you create'
+  )
   .option('-n, --no-css', 'dont include a css for the components you create')
-  .option('-d, --no-default <ext>', 'change extention for css file', 'css')
+  .option('-d, --no-default', 'change extention for css file', 'css')
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    console.log(options.css);
-    // optionsToSettings(options);
-    // console.log
+    optionsToSettings(options);
     createReactComponents(CWD, files);
   });
 
-// program.command('* <components...>').action(function(files, options) {
-//   // console.log('args in *: ', options);
-// createReactComponents(CWD, files);
-// });
+program.command('* <components...>').action(function(files, options) {
+  optionsToSettings(options);
+  createReactComponents(CWD, files);
+});
 
 program.parse(process.argv);
 

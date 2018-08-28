@@ -13,6 +13,15 @@ const cwd = path.join(__dirname, testingFolder);
 
 console.log(cwd);
 
+// use App as the component being generated
+const settings = [
+  { flag: ['-c', 'less'], files: ['App.js', 'App.less', 'index.js'] },
+  { flag: ['-i'], files: ['App.js', 'App.css'] },
+  { flag: ['-f'], files: ['App.css', 'App.js'] },
+  { flag: ['-n'], files: ['App.js', 'index.js'] },
+  { flag: ['-d'], files: [] }
+];
+
 const test = false;
 
 function spawn(args, done) {
@@ -67,6 +76,10 @@ describe('Create React Component', function() {
       spawn(['init'], done);
     });
 
+    after(function(done) {
+      fs.remove(path.join(cwd, '.ccr'), done);
+    });
+
     it('should create a .ccr/ folder in cwd', function(done) {
       fs.pathExists(SETTINGS_PATH, done);
     });
@@ -75,4 +88,51 @@ describe('Create React Component', function() {
       fs.pathExists(path.join(SETTINGS_PATH, 'settings.json'), done);
     });
   });
+
+  describe('settings', function() {
+    settings.forEach(function(setting) {
+      it(`flag (${setting.flag.join(
+        ' '
+      )}) should render the correct files`, function(done) {
+        spawn(['create'].concat(setting.flag, 'App'), function(err) {
+          if (err) {
+            console.log(err);
+          }
+          checkFilesExists(cwd, ['App'], setting.files, done);
+        });
+      });
+    });
+  });
 });
+
+function makeComponentFiles(dest, components, files) {
+  return components.map(function(component_path) {
+    return files.map(function(file) {
+      return path.join(dest, component_path, file);
+    });
+  });
+}
+
+function checkFilesExists(dest, components, files, done) {
+  const renderedFiles = makeComponentFiles(dest, components, files);
+
+  async.each(
+    renderedFiles,
+    function(files, next) {
+      async.each(
+        files,
+        function(file, nextInner) {
+          fs.pathExists(file, function(err, exists) {
+            err =
+              err || !exists
+                ? new Error('File:' + file + ' Doesnt exists')
+                : null;
+            nextInner(err);
+          });
+        },
+        next
+      );
+    },
+    done
+  );
+}

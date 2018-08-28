@@ -5,27 +5,30 @@
 const chai = require('chai');
 const path = require('path');
 const async = require('async');
-const Template = require('../lib/template');
-
 const fs = require('fs-extra');
 
+const Template = require('../lib/template');
 const settings = require('../lib/settings');
 const Component = require('../lib/component');
-const reactAdapter = require('../lib/react-plugin')(settings._config);
-console.log(reactAdapter, settings._config);
+const reactAdapter = require('../lib/react-plugin');
 const expect = chai.expect;
 
+const test = false;
 const packages = ['index', 'component', 'style'];
-
 const testingComponents = ['App'];
 
 const TEMPLATES_PATH = path.join(__dirname, '../templates/');
 const TEMPLATES_DEST_PATH = path.join(__dirname, './testing-env');
 
+test && console.log(reactAdapter, settings._config);
+
 describe('Templates', function() {
   before(function() {
-    template = new Template(TEMPLATES_PATH, reactAdapter.packages);
-    console.log(template);
+    template = new Template(
+      TEMPLATES_PATH,
+      reactAdapter(settings._config).packages
+    );
+    test && console.log(template);
   });
 
   describe('initialization', function() {
@@ -75,19 +78,11 @@ describe('Templates', function() {
         done
       );
     });
-
-    // it('should process', function() {});
-
-    // it('should ', function() {});
-    // it('should ', function() {});
-
-    // it('should should render correct number of files', function() {});
   });
 
   describe('adapter', function() {
     before(function(done) {
-      settings.set('cssType', 'less');
-      template.adapter(reactAdapter.process);
+      template.adapter(reactAdapter(settings._config).process);
 
       const component = new Component(TEMPLATES_DEST_PATH, 'App');
 
@@ -110,17 +105,10 @@ describe('Templates', function() {
       checkFilesExists(
         TEMPLATES_DEST_PATH,
         testingComponents,
-        ['index.js', 'App.js', 'App.less'],
+        ['index.js', 'App.js', 'App.css'],
         done
       );
     });
-
-    // it('should process', function() {});
-
-    // it('should ', function() {});
-    // it('should ', function() {});
-
-    // it('should should render correct number of files', function() {});
   }); // plugins
 }); // Templates
 
