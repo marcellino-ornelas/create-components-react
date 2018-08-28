@@ -11,7 +11,7 @@ const path = require('path');
 
 const CWD = process.cwd();
 
-console.log('Current working directory: ', CWD);
+// console.log('Current working directory: ', CWD);
 
 // settings.set('cwd', CWD, true);
 
@@ -23,8 +23,18 @@ function optionsToSettings(_program) {
   });
 }
 
-program.version('2.0.3');
+try {
+  var localSettings = fs.readJsonSync(path.join(CWD, '.ccr', 'settings.json'));
 
+  settings.import(localSettings);
+} catch (e) {
+  settings.get('verbose') &&
+    console.log(
+      'Local settings were not located. Using default settings for configuration...'
+    );
+}
+
+program.version('2.0.3');
 /*
  * future
 */
@@ -77,14 +87,15 @@ program
   .description('create a new component')
   .action(function(files, options) {
     optionsToSettings(options);
+    console.log(settings._config);
     createReactComponents(CWD, files);
   });
 
-program.command('* <components...>').action(function(files, options) {
-  optionsToSettings(options);
-  createReactComponents(CWD, files);
-});
+// program.command('* <components...>').action(function(files, options) {
+//   optionsToSettings(options);
+//   createReactComponents(CWD, files);
+// });
 
 program.parse(process.argv);
 
-// optionsToSettings(program);
+optionsToSettings(program);
