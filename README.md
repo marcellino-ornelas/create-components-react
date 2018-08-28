@@ -22,15 +22,15 @@ This will create a react component folder that will include a `<ComponentName>.j
 
 ### Syntax
 
-`react-component create [flags] ComponentName [ComponentName[, ...]]`
+`react-component create [flags...] <ComponentName> [ComponentNames...]`
 
 #### Parameters
 
-`[flags]` (optional) flags to change the behavior of create.
+`[flags...]` (optional) flags to change the behavior of create.
 
 `ComponentName` (required) Name of the component you would like to create.
 
-`[ComponentName[, ...]]` (optional)
+`[ComponentName...]` (optional)
 
 ---
 
@@ -48,27 +48,32 @@ This will create a react component folder that will include a `<ComponentName>.j
         <tr>
             <td>-c, --css-type <ext> </td>
             <td>css</td>
-            <td>change extention for css file</td>
+            <td>Change extention for css file</td>
         </tr>
         <tr>
             <td>-t, --no-test</td>
             <td>false</td>
-            <td>dont include a testing file for the component(s) you create</td>
+            <td>Dont include a testing file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-n, --no-css</td>
             <td>false</td>
-            <td>dont include a css file for the component(s) you create</td>
+            <td>Dont include a css file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-i, --no-index</td>
             <td>false</td>
-            <td>dont include a index for the component(s) you create</td>
+            <td>Dont include a index file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-d, --no-default</td>
             <td>false</td>
-            <td>dont include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
+            <td>Dont include any of the default packages for react. This is the same as saying <code>react-component create -i</code></td>
+        </tr>        
+        <tr>
+            <td>-r, --extend-cwd <path></td>
+            <td> '' </td>
+            <td>path to extend your current working directory path</td>
         </tr>
         <!-- impliment -->
         <!-- <tr>
@@ -152,19 +157,40 @@ Create Components React assumes that you want all paths to a component and the c
 
 create-components-react gives you the capability to make localized settings for each repo you wish to chose. These setting will change the behavior of how create-components-react functions. These settings would be like using the flags in the command line but it will be apply everytime a react component is made.
 
+> Note: It is recommended to initailize the settings in your repos root directory.
+
 ---
 
-### Usage
+### Syntax
 
-    react-components init [flags]
+    react-components init [flags...]
+
+---
+
+#### Parameters
+
+`[flags...]` (optional) flags to change the behavior of init.
 
 ---
 
 ### Flags
 
--   `-t, --templates` Initialize create-components react to use templates functionality
-
-> Note: It is recommended to initailize the settings in your repos root directory.
+<table>
+    <thead>
+        <tr>
+            <th>Flag</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>-t, --templates <ext> </td>
+            <td>false</td>
+            <td>Initialize create-components react to use templates functionality</td>
+        </tr>
+    </tbody>
+</table>
 
 ---
 
@@ -178,9 +204,9 @@ Initailize create-component-react settings
 
     react-component init
 
-This will create a `.ccr` folder with `settings.json` file inside it.
+This will create a `.ccr/` folder with `settings.json` file inside it.
 
-> If `-t` flag is present it will also make a templates folder inside `.ccr` folder
+> If `-t` flag is present it will also make a `templates/` folder inside `.ccr/` folder
 
 ## Templating
 
@@ -192,15 +218,37 @@ This feature allows a user to construct how of each file of a component should r
 
 > Note: create-compoents-react uses a templating engine to compile and render the files. More documentation on how to use the templating engine can be found [here](http://olado.github.io/doT/index.html)
 
+### Syntax
+
+`react-component template`
+
+### Parameters
+
+None
+
 ---
 
-### Usage
+### Flags
+
+No flags for Templating
+
+### Examples
 
 To initailize templating, you can use:
 
     react-component template
 
-This will only make templating folder to use. you can initialize this with the settings command when initializing local settings. Just include the `-t` flag.
+This will only make templating folder to use. You still would need set the `templates` property in your `.ccr/settings.json` to true.
+
+    {
+        ...
+        templates: true,
+        ...
+    }
+
+This feature still relays on your local settings to work. It is recommended to initalize templates usage when initailizing settings. This feature is mostly here for if you have a old repo with local settings already initailized and want to add templates.
+
+This is the recommended way to initailze templates if you dont have local settings initialized.
 
     react-component init -t
 
@@ -208,7 +256,7 @@ This will initialize local settings and local templating.
 
 ---
 
-### doT
+#### doT
 
 The doT templating language uses `{{}}` for inertoplation and javascript execution. Here are some basic uses of doT:
 
@@ -225,7 +273,7 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
         <tr>
             <td>Interpolation</td>
             <td>{{= someVariable }}</td>
-            <td>Replace {{= }} with the value of the variable</td>
+            <td>Replaces {{= }} with the value of the variable</td>
         </tr>
         <tr>
             <td>Conditionals</td>
@@ -236,19 +284,8 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
             </td>
             <td>Render the code between the braces when the expression evaluates to true</td>
         </tr>
-        <!-- <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr> -->
     </tbody>
 </table>
-
----
-
-### Flags
-
-No flags for Templating
 
 ---
 
@@ -266,12 +303,14 @@ No flags for Templating
             |
             | - settings.json
 
-Lets give you some basic info on how templating works. When you initialize templating in create-components -react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
+Lets give you some basic info on how templating works. When you initialize templating in create-components-react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
 
 You also are allowed to add your own packages to use throughout the repo. These packages can have directories and/or dot files for rendering inside. each directory( even nested ones!) and all files will be made to the destination. To add custom packages create a new folder inside `.ccr/templates`. The name of the folder will be the package name. Inside your custom package folder create a file(s) and/or directory(s). Each file inside that you would like to have rendered with templating should include a `.dot` extention at the end of the file.
 If the only extention to your file is a `.dot` extention then will be rendered as a '.js' file. If you would like to have another type of extention include it before the `.dot` extention.
 
 Example to create a css file: `someFileName.css.dot`
+
+> Note: The `-c` flag in create will replace the extention for all `.css` files.
 
 > Review Create flags section for a full list of all flags.
 
@@ -281,24 +320,28 @@ Example to create a css file: `someFileName.css.dot`
 
 Open your terminal and go to the directory that you wish to use.
 
-    cd path/to/repo\ Folder
+    cd path/to/repoFolder/
 
 Initialize Settings and Templates
 
     react-component init -t
 
+or this if you have settings already initialized.
+
+    react-component template
+
 This will create:
 
-    Repo Folder
-        | - .ccr
-            | - templates
-                | - component
+    RepoFolder/
+        | - .ccr/
+            | - templates/
+                | - component/
                 |   | - component.dot
                 |
-                | - index
+                | - index/
                 |   | - index.dot
                 |
-                | - style
+                | - style/
                 |   | - style.css.dot
                 |
                 | - settings.json
@@ -337,7 +380,7 @@ open `component/component.dot` and you should see something like this.
 
 `component/component.dot` is the default template to make each component file. You now can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can now use the `create` command and each component created will now take on the new look of the template file you updated.
 
-Example: edit `component/component.dot` to render a component that doesnt include any life cycle methods and always uses the constructor function. Now your file should look like this:
+Example: edit `component/component.dot` to render a component that doesnt include any react life cycle methods always uses the constructor function. Now your file should look like this:
 
         import React, { Component } from 'react';
         {{? it.component.useCSS }}

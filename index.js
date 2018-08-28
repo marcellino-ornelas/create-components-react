@@ -77,12 +77,16 @@ program
     '-i, --no-index',
     'dont include default index file for the components you create'
   )
+  .option('-n, --no-css', 'dont include a css for the components you create')
   .option(
     '-t, --no-test',
     'dont include a testing file for the components you create'
   )
-  .option('-n, --no-css', 'dont include a css for the components you create')
   .option('-d, --no-default', 'change extention for css file', 'css')
+  .option(
+    '-r, --extend-cwd <path>',
+    'A path to add on to your current working directory'
+  )
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
