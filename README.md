@@ -1,4 +1,4 @@
-# Create Componentseact
+# Create Components react
 
 ## Description
 
@@ -48,38 +48,38 @@ This will create a react component folder that will include a `<ComponentName>.j
         <tr>
             <td>-c, --css-type <ext> </td>
             <td>css</td>
-            <td>Change extention for css file</td>
+            <td>Change extension for css file</td>
         </tr>
         <tr>
             <td>-t, --no-test</td>
             <td>false</td>
-            <td>Dont include a testing file for the component(s) you create</td>
+            <td>Don't include a testing file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-n, --no-css</td>
             <td>false</td>
-            <td>Dont include a css file for the component(s) you create</td>
+            <td>Don't include a css file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-i, --no-index</td>
             <td>false</td>
-            <td>Dont include a index file for the component(s) you create</td>
+            <td>Don't include a index file for the component(s) you create</td>
         </tr>
         <tr>
             <td>-d, --no-default</td>
             <td>false</td>
-            <td>Dont include any of the default packages for react. This is the same as saying <code>react-component create -i</code></td>
+            <td>Don't include any of the default packages for react. This is the same as saying <code>react-component create -i</code></td>
         </tr>        
         <tr>
             <td>-r, --extend-cwd <path></td>
             <td> '' </td>
-            <td>path to extend your current working directory path</td>
+            <td>Path to extend your current working directory path</td>
         </tr>
         <!-- impliment -->
         <!-- <tr>
             <td>-p, --packages</td>
             <td>default</td>
-            <td>dont include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
+            <td>don't include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
         </tr> -->
     </tbody>
 </table>
@@ -88,7 +88,7 @@ This will create a react component folder that will include a `<ComponentName>.j
 
 ### Examples
 
-`react-component create App` will create App component folder in your current working directory
+`react-component create App` will create an App component folder in your current working directory
 
     App
     |--- App.js
@@ -110,7 +110,7 @@ or
         |
         |--- index.js
 
-you can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
+You can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
 
     react-component create Nav/NavItem SideBar SideBar/SideBarItem
 
@@ -143,7 +143,9 @@ you can also chain components names `react-component <ComponentName> <ComponentN
 
 ### Tips
 
-Create Components React assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
+<!-- fix this here -->
+
+create-components-react assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
 
 `app` will turn into `App`
 
@@ -246,9 +248,9 @@ This will only make templating folder to use. You still would need set the `temp
         ...
     }
 
-This feature still relays on your local settings to work. It is recommended to initalize templates usage when initailizing settings. This feature is mostly here for if you have a old repo with local settings already initailized and want to add templates.
+This feature still relays on your local settings to work. It is recommended to initalize templates usage when initailizing settings. This feature is mostly here for those who have a old repo with create-components-react local settings already initailized and want to add templating.
 
-This is the recommended way to initailze templates if you dont have local settings initialized.
+This is the recommended way to initailze templates if you don't have local settings initialized.
 
     react-component init -t
 
@@ -273,7 +275,7 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
         <tr>
             <td>Interpolation</td>
             <td>{{= someVariable }}</td>
-            <td>Replaces {{= }} with the value of the variable</td>
+            <td>Replaces {{= someVar }} with the value of the variable</td>
         </tr>
         <tr>
             <td>Conditionals</td>
@@ -292,16 +294,16 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
 ### Packages
 
     | - templates
-            | - component
-            |   | - component.dot
-            |
-            | - index
-            |   | - index.dot
-            |
-            | - style
-            |   | - style.css.dot
-            |
-            | - settings.json
+        | - component
+        |   | - component.dot
+        |
+        | - index
+        |   | - index.dot
+        |
+        | - style
+        |   | - style.css.dot
+        |
+        | - settings.json
 
 Lets give you some basic info on how templating works. When you initialize templating in create-components-react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
 
@@ -333,48 +335,48 @@ or this if you have settings already initialized.
 This will create:
 
     RepoFolder/
-        | - .ccr/
-            | - templates/
-                | - component/
-                |   | - component.dot
-                |
-                | - index/
-                |   | - index.dot
-                |
-                | - style/
-                |   | - style.css.dot
-                |
-                | - settings.json
+    | - .ccr/
+        | - templates/
+            | - component/
+            |   | - component.dot
+            |
+            | - index/
+            |   | - index.dot
+            |
+            | - style/
+            |   | - style.css.dot
+            |
+            | - settings.json
 
 open `component/component.dot` and you should see something like this.
 
-        import React, { Component } from 'react';
-        {{? it.component.useCSS }}
-        import './{{= it.component.name }}.css';
-        {{?}}
+    import React, { Component } from 'react';
+    {{? it.component.useCSS }}
+    import './{{= it.component.name }}.css';
+    {{?}}
 
-        class {{= it.component.name}} extends Component {
-          // constructor(props){
-            // super(props);
-            // this.state = {};
-          // }
+    class {{= it.component.name}} extends Component {
+      // constructor(props){
+        // super(props);
+        // this.state = {};
+      // }
 
-          // componentWillMount(){}
-          // componentDidMount(){}
-          // componentWillUnmount(){}
+      // componentWillMount(){}
+      // componentDidMount(){}
+      // componentWillUnmount(){}
 
-          // componentWillReceiveProps(){}
-          // shouldComponentUpdate(){}
-          // componentWillUpdate(){}
-          // componentDidUpdate(){}
+      // componentWillReceiveProps(){}
+      // shouldComponentUpdate(){}
+      // componentWillUpdate(){}
+      // componentDidUpdate(){}
 
-          render() {
-            return (
-              <div></div>
-            );
-          }
-        }
-        export default {{= it.component.name}};
+      render() {
+        return (
+          <div></div>
+        );
+      }
+    }
+    export default {{= it.component.name}};
 
 > Note: All templates in the `.ccr/templates` folder are the default templates for create-components-react.
 
@@ -382,36 +384,36 @@ open `component/component.dot` and you should see something like this.
 
 Example: edit `component/component.dot` to render a component that doesnt include any react life cycle methods always uses the constructor function. Now your file should look like this:
 
-        import React, { Component } from 'react';
-        {{? it.component.useCSS }}
-        import './{{= it.component.name }}.css';
-        {{?}}
+    import React, { Component } from 'react';
+    {{? it.component.useCSS }}
+    import './{{= it.component.name }}.css';
+    {{?}}
 
-        class {{= it.component.name}} extends Component {
-          constructor(props){
-            super(props);
-            this.state = {};
-          }
+    class {{= it.component.name}} extends Component {
+      constructor(props){
+        super(props);
+        this.state = {};
+      }
 
-          render() {
-            return (
-              <div></div>
-            );
-          }
-        }
-        export default {{= it.component.name}};
+      render() {
+        return (
+          <div></div>
+        );
+      }
+    }
+    export default {{= it.component.name}};
 
 Now when you execute `react-components create App` it should make a directory like this:
 
-        Repo Folder
-        | - .ccr
-            | - ...
-        | _ App
-            | - App.js
-            | - index.js
-            | - style.css
+    Repo Folder
+    | - .ccr
+        | - ...
+    | _ App
+        | - App.js
+        | - index.js
+        | - style.css
 
-This doesnt look to different than the default version right? Dont be disappointed to fast. Lets take a look at `App.js`. This file is create from the `component/component.dot` so if we have all our configurations right, it should now look like this:
+This doesnt look to different than the default version right? Don't be disappointed to fast. Lets take a look at `App.js`. This file is create from the `component/component.dot` so if we have all our configurations right, it should now look like this:
 
     import React, { Component } from 'react';
 
