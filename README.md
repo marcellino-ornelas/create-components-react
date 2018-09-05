@@ -219,7 +219,7 @@ Initailize create-component-react settings
 
 This will create a `.ccr/` folder with `settings.json` file inside it.
 
-> If `-t` flag is present it will also make a `templates/` folder inside `.ccr/` folder
+> Note: If `-t` flag is present it will also make a `templates/` folder inside `.ccr/` folder
 
 #### Setting options
 
