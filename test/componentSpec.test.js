@@ -23,7 +23,7 @@ describe('Component', function() {
     it('should create a new object with propertys [ name, dir, dirWithComponentName ]', function() {
       expect(component.name).to.be.a('string');
       expect(component.dir).to.be.a('string');
-      expect(component.dirWithComponentName).to.be.a('string');
+      // expect(component.dirWithComponentName).to.be.a('string');
     });
 
     it('should capitalize the first char in component name', function() {

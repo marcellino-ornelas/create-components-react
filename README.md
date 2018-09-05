@@ -1,10 +1,8 @@
 # Create Components react
 
-## Description
-
 This module will create a react component folder in your current working directory.
 
-## Install
+### Install
 
 `npm install -g create-components-react`
 
@@ -72,15 +70,9 @@ This will create a react component folder that will include a `<ComponentName>.j
         </tr>        
         <tr>
             <td>-r, --extend-cwd <path></td>
-            <td> '' </td>
+            <td></td>
             <td>Path to extend your current working directory path</td>
         </tr>
-        <!-- impliment -->
-        <!-- <tr>
-            <td>-p, --packages</td>
-            <td>default</td>
-            <td>don't include any of the default styles for react. This is the same as saying <code>react-component create -i</code></td>
-        </tr> -->
     </tbody>
 </table>
 
@@ -90,19 +82,19 @@ This will create a react component folder that will include a `<ComponentName>.j
 
 `react-component create App` will create an App component folder in your current working directory
 
-    App
+    App/
     |--- App.js
     |
     |--- App.css
     |
     |--- index.js
 
-or
+If you would like a component to be a child of another component put a path to the folder of the parent component first followed by the child component after. `react-component create <ParentFolder>/<ChildComponent>` will create a child component in the parent folder.
 
-`react-component create Nav/NavItem` will create a NavItem component folder in Nav folder.
+`react-component create Nav/NavItem` will create a NavItem component inside the nav folder.
 
-    Nav
-    | -- NavItem
+    Nav/
+    | -- NavItem/
         |
         |--- NavItem.js
         |
@@ -110,12 +102,29 @@ or
         |
         |--- index.js
 
+If Nav was a component already then it would look like this.
+
+    Nav/
+    |--- index.js
+    |--- Nav.js
+    |--- Nav.css
+    |
+    | -- NavItem/
+        |
+        |--- NavItem.js
+        |
+        |--- NavItem.css
+        |
+        |--- index.js
+
+> Note: Parent folder(s) will be created if they dont exist. This will not make the parent folder a component.
+
 You can also chain components names `react-component <ComponentName> <ComponentName> <ComponentName>`
 
     react-component create Nav/NavItem SideBar SideBar/SideBarItem
 
-    Nav
-    | -- NavItem
+    Nav/
+    | -- NavItem/
     |  |
     |  |--- NavItem.js
     |  |
@@ -123,7 +132,7 @@ You can also chain components names `react-component <ComponentName> <ComponentN
     |  |
     |  |--- index.js
     |
-    sideBar
+    sideBar/
     |
     |-- SideBar.js
     |
@@ -131,7 +140,7 @@ You can also chain components names `react-component <ComponentName> <ComponentN
     |
     |-- index.js
     |
-    | -- SideBarItem
+    | -- SideBarItem/
         |
         |--- SideBarItem.js
         |
@@ -143,9 +152,7 @@ You can also chain components names `react-component <ComponentName> <ComponentN
 
 ### Tips
 
-<!-- fix this here -->
-
-create-components-react assumes that you want all component name and paths to have there first letter as a capital letter. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
+create-components-react assumes that you want the first character of all paths to a component and the component's name to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
 
     react-component create app
 
@@ -161,7 +168,7 @@ create-components-react assumes that you want all component name and paths to ha
 
 ### Description
 
-create-components-react gives you the capability to make localized settings for each repo you wish to chose. These setting will change the behavior of how create-components-react functions. These settings would be like using the flags in the command line but it will be apply everytime a react component is made.
+create-components-react gives you the capability to make localized settings for each repo you wish to chose. These setting will change the behavior of how create-components-react functions. These settings would be like using the flags in the command line but it will be applied every time a react component is made.
 
 > Note: It is recommended to initailize the settings in your repos root directory.
 
@@ -202,7 +209,7 @@ create-components-react gives you the capability to make localized settings for 
 
 ### Examples
 
-Fist change into the directory that you wish to initailize local settings.
+First navigate into the directory that you wish to initailize local settings.
 
     cd some/path/to/repo
 
@@ -214,6 +221,69 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
 
 > If `-t` flag is present it will also make a `templates/` folder inside `.ccr/` folder
 
+#### Setting options
+
+<table id="setting-options">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>test</td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>Include a testing file for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>css</td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>Include a css file for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>index</td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>Include a index file for the component(s) you create</td>
+        </tr>
+        <tr>
+            <td>default</td>
+            <td>Boolean</td>
+            <td>true</td>
+            <td>Include  default packages for react</td>
+        </tr>
+        <tr>
+            <td>verbose</td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>log progress while creating components</td>
+        </tr>
+        <tr>
+            <td>templates</td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Use local templates instead of defaults</td>
+        </tr>
+        <tr>
+            <td>cssType</td>
+            <td>String</td>
+            <td></td>
+            <td>Change extension for css file</td>
+        </tr>       
+        <tr>
+            <td>extendCwd</td>
+            <td>String</td>
+            <td></td>
+            <td>Path to extend your current working directory</td>
+        </tr>
+    </tbody>
+</table>
+
 ## Templating
 
 ---
@@ -222,7 +292,7 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
 
 This feature allows a user to construct how of each file of a component should render within a repo. This gives the ability for a user to modify or add to the structure of a component and the files it should include.
 
-> Note: create-compoents-react uses a templating engine to compile and render the files. More documentation on how to use the templating engine can be found [here](http://olado.github.io/doT/index.html)
+> Note: create-components-react uses a templating engine to compile and render the files. More documentation on how to use the templating engine can be found [here](http://olado.github.io/doT/index.html)
 
 ### Syntax
 
@@ -262,7 +332,7 @@ This will initialize local settings and local templating.
 
 ---
 
-#### doT
+### doT
 
 The doT templating language uses `{{}}` for inertoplation and javascript execution. Here are some basic uses of doT:
 
@@ -278,33 +348,112 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
     <tbody>
         <tr>
             <td>Interpolation</td>
-            <td>{{= someVariable }}</td>
-            <td>Replaces {{= someVar }} with the value of the variable</td>
+            <td>{{= expression }}</td>
+            <td>Replaces {{= expression }} with the value of the expression</td>
         </tr>
         <tr>
             <td>Conditionals</td>
             <td>
-                {{? expression }}<br />
+                {{? condition }}<br />
                     /* code here*/<br />
                 {{?}}<br />
             </td>
-            <td>Render the code between the braces when the expression evaluates to true</td>
+            <td>Render the code between the braces when the condition evaluates to true</td>
         </tr>
     </tbody>
 </table>
 
 ---
 
+### Env options
+
+#### File
+
+usage:
+
+    it.file
+
+propertys:
+
+<table id="env-options-file">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>String</td>
+            <td>Original name of the current file you are rendering</td>
+        </tr>
+        <tr>
+            <td>path</td>
+            <td>String</td>
+            <td>Directory path where the current file will be saved to</td>
+        </tr>
+        <tr>
+            <td>ext</td>
+            <td>String</td>
+            <td>Extentiom type for the current file.(no dot included)</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Component
+
+usage:
+
+    it.component
+
+propertys:
+
+<table id="env-options-component">
+    <thead>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>name</td>
+            <td>String</td>
+            <td>Name of the Component we are generating</td>
+        </tr>
+        <tr>
+            <td>dir</td>
+            <td>String</td>
+            <td>Directory path where the current file will be saved to</td>
+        </tr>
+    </tbody>
+</table>
+
+#### Setting
+
+usage:
+
+    it.settings
+
+propertys:
+
+The properties here are the same as the ones you can use in [settings options section](#setting-options)
+
+---
+
 ### Packages
 
-    | - templates
-        | - component
+    | - templates/
+        | - component/
         |   | - component.dot
         |
-        | - index
+        | - index/
         |   | - index.dot
         |
-        | - style
+        | - style/
         |   | - style.css.dot
         |
         | - settings.json
@@ -384,9 +533,35 @@ open `component/component.dot` and you should see something like this.
 
 > Note: All templates in the `.ccr/templates` folder are the default templates for create-components-react.
 
-`component/component.dot` is the default template to make each component file. You now can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can now use the `create` command and each component created will now take on the new look of the template file you updated.
+`component/component.dot` is the default template to make each component file. You can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can use the `create` command and each component created will take on the look of the template file you updated.
 
-Example: edit `component/component.dot` to render a component that doesnt include any react life cycle methods always uses the constructor function. Now your file should look like this:
+There is some special syntax on this file that doesnt look familiar.
+
+    {{? it.component.useCSS }}
+    import './{{= it.component.name }}.css';
+    {{?}}
+
+or
+
+    {{= it.component.name}}
+
+This is doT snytax. The first example is a example of a conditional in doT and the second one is interpolation. I recommend to review the doT documentation <a href="http://olado.github.io/doT/index.html" target="_blank">here</a> to see how to use this correctly this templating engine. The next thing that is unfamiliar is:
+
+      it.component.name
+
+Every file that gets rendered we give you configuration and enviroment settings to let you customize your files anyway you would like.
+
+The top level element is always `it`.
+
+There are three main variables that will be important for you to use. The three are:
+
+-   [File](#env-options-file) -> `it.file`
+-   [Component](#env-options-component) -> `it.component`
+-   [Settings](#setting-options) -> `it.settings`
+
+Review the [Env options](#env-options-file) section to see all possible propertys for these objects.
+
+Example: Edit `component/component.dot` to render a component that doesn't include any react lifecycle methods always uses the constructor function. Now your file should look like this:
 
     import React, { Component } from 'react';
     {{? it.component.useCSS }}
@@ -409,15 +584,16 @@ Example: edit `component/component.dot` to render a component that doesnt includ
 
 Now when you execute `react-components create App` it should make a directory like this:
 
-    Repo Folder
-    | - .ccr
-        | - ...
-    | _ App
+    Repo Folder/
+    | - .ccr/
+    |   | - ...
+    |
+    | _ App/
         | - App.js
         | - index.js
         | - style.css
 
-This doesnt look to different than the default version right? Don't be disappointed to fast. Lets take a look at `App.js`. This file is create from the `component/component.dot` so if we have all our configurations right, it should now look like this:
+This doesn't look to different than the default version right? Don't be disappointed too quickly. Let's take a look at `App.js`. This file is created from the `component/component.dot` so if we have all our configurations right, it should now look like this:
 
     import React, { Component } from 'react';
 
@@ -434,6 +610,8 @@ This doesnt look to different than the default version right? Don't be disappoin
       }
     }
     export default App;
+
+This is the code we have just editted in `.ccr/templates/component/component.dot`. You can edit to file however you want to fit your needs while developing with react.
 
 <!-- ## Create
 CAC DSV
