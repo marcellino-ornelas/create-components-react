@@ -87,11 +87,15 @@ program
     '-r, --extend-cwd <path>',
     'A path to add on to your current working directory'
   )
+  .option(
+    '-p, --packages <packages>',
+    'A path to add on to your current working directory'
+    // packages => (packages ? packages.split(':') : [])
+  )
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
     optionsToSettings(options);
-    console.log(settings._config);
     createReactComponents(CWD, files);
   });
 

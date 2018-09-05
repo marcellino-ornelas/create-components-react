@@ -145,9 +145,13 @@ You can also chain components names `react-component <ComponentName> <ComponentN
 
 <!-- fix this here -->
 
-create-components-react assumes that you want all paths to a component and the component's name first character to be uppercase. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
+create-components-react assumes that you want all component name and paths to have there first letter as a capital letter. If you input a component name or any paths that use lowercase chars, this package will convert it to the uppercase version. Examples:
+
+    react-component create app
 
 `app` will turn into `App`
+
+    react-component create nav/navItem
 
 `nav/navItem` will turn into `Nav/NavItem`
 

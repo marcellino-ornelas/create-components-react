@@ -5,7 +5,7 @@
     "css": true,
     "index":true,
     "default": true,
-    "cssType": "css",
+    "cssType": "",
     "templates": false,
     "extendCwd": "",
     "verbose": false

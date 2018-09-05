@@ -11,8 +11,6 @@ const child = require('child_process');
 const testingFolder = './testing-env';
 const cwd = path.join(__dirname, testingFolder);
 
-console.log(cwd);
-
 // use App as the component being generated
 const settings = [
   { flag: ['-c', 'less'], files: ['App.js', 'App.less', 'index.js'] },
@@ -24,21 +22,7 @@ const settings = [
 
 const test = false;
 
-function spawn(args, done) {
-  child.execFile(
-    `node`,
-    ['../../index.js'].concat(args),
-    {
-      cwd: cwd
-    },
-    function(err, stdout, stderr) {
-      test && console.log('err:', err);
-      test && console.log('stdout:', stdout);
-      test && console.log('stderr:', stderr);
-      done(err);
-    }
-  );
-}
+test && console.log(cwd);
 
 describe('Create React Component', function() {
   before(function(done) {
@@ -104,6 +88,26 @@ describe('Create React Component', function() {
     });
   });
 });
+
+/*
+ * Helper functions
+*/
+
+function spawn(args, done) {
+  child.execFile(
+    `node`,
+    ['../../index.js'].concat(args),
+    {
+      cwd: cwd
+    },
+    function(err, stdout, stderr) {
+      test && console.log('err:', err);
+      test && console.log('stdout:', stdout);
+      test && console.log('stderr:', stderr);
+      done(err);
+    }
+  );
+}
 
 function makeComponentFiles(dest, components, files) {
   return components.map(function(component_path) {

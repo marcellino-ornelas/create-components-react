@@ -69,7 +69,7 @@ describe('Templates', function() {
       fs.remove(TEMPLATES_DEST_PATH, done);
     });
 
-    it('should render the correct number of files', function(done) {
+    it('should render the correct number of files with no react adapter', function(done) {
       // Make the files with there paths for each component
       checkFilesExists(
         TEMPLATES_DEST_PATH,
@@ -100,7 +100,7 @@ describe('Templates', function() {
       fs.remove(TEMPLATES_DEST_PATH, done);
     });
 
-    it('should render the correct number of files', function(done) {
+    it('should render the correct number of files with react adapter', function(done) {
       // Make the files with there paths for each component
       checkFilesExists(
         TEMPLATES_DEST_PATH,
