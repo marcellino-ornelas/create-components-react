@@ -47,12 +47,7 @@ This will create a react component folder that will include a `<ComponentName>.j
             <td>Change extension for css file</td>
         </tr>
         <tr>
-            <td>-t, --no-test</td>
-            <td>false</td>
-            <td>Don't include a testing file for the component(s) you create</td>
-        </tr>
-        <tr>
-            <td>-n, --no-css</td>
+            <td>-s, --no-css</td>
             <td>false</td>
             <td>Don't include a css file for the component(s) you create</td>
         </tr>
@@ -65,6 +60,11 @@ This will create a react component folder that will include a `<ComponentName>.j
             <td>-d, --no-default</td>
             <td>false</td>
             <td>Don't include any of the default packages for react. This is the same as saying <code>react-component create -i</code></td>
+        </tr> 
+        <tr>
+            <td>-t, --test</td>
+            <td>false</td>
+            <td>Include a test file for the component(s) you create</td>
         </tr>        
         <tr>
             <td>-r, --extend-cwd <path></td>

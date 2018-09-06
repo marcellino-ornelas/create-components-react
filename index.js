@@ -11,15 +11,10 @@ const path = require('path');
 
 const CWD = process.cwd();
 
-// console.log('Current working directory: ', CWD);
-
-// settings.set('cwd', CWD, true);
-
 function optionsToSettings(_program) {
-  // console.log('optiomns to settings:', options);
   _program.options.forEach(function(option) {
     var prop = option.attributeName();
-    settings.set(prop, _program[prop]);
+    settings.set(prop, _program[prop], true);
   });
 }
 
@@ -34,20 +29,9 @@ try {
     );
 }
 
-program.version('2.0.3');
-/*
- * future
-*/
-// .option('-e, --exclude <ext>', 'change extention for css file');
-// .option('-o, --only <ext>', 'change extention for css file');
-
-// program.command('set <prop> <value>')
-//   .description('set a global setting')
-//   .action(function( prop, value, options){
-//     console.log('args in set: ', arguments);
-//   });
-
 const createReactComponents = require('./lib');
+
+program.version('2.0.3');
 
 program
   .command('init')
@@ -67,22 +51,22 @@ program
 
 program
   .command('create <components...>')
-  // .option('-p, --include-package <packages...>')
+  .option('-v, --verbose', 'logs')
   .option('-c, --css-type <ext>', 'change extention for css file', 'css')
   .option(
     '-f, --functional',
-    'use functional component instead of a state component'
+    'Use functional component instead of a state component'
   )
   .option(
     '-i, --no-index',
-    'dont include default index file for the components you create'
+    "Don't include default index file for the components you create"
   )
-  .option('-n, --no-css', 'dont include a css for the components you create')
-  .option(
-    '-t, --no-test',
-    'dont include a testing file for the components you create'
-  )
+  .option('-s, --no-css', "Don't include a css for the component(s) you create")
   .option('-d, --no-default', 'change extention for css file', 'css')
+  .option(
+    '-t, --test',
+    'Include a testing file for the component(s) you create'
+  )
   .option(
     '-r, --extend-cwd <path>',
     'A path to add on to your current working directory'
@@ -95,6 +79,7 @@ program
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
+    console.log('packages', options.packages);
     optionsToSettings(options);
     createReactComponents(CWD, files);
   });
