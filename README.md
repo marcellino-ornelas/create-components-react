@@ -8,8 +8,6 @@ This module will create a react component folder in your current working directo
 
 ## Create
 
----
-
 ### Description
 
 This will create a react component folder that will include a `<ComponentName>.js`, `<ComponentName>.css`, and `index.js`.
@@ -164,8 +162,6 @@ create-components-react assumes that you want the first character of all paths t
 
 ## Settings
 
----
-
 ### Description
 
 create-components-react gives you the capability to make localized settings for each repo you wish to chose. These setting will change the behavior of how create-components-react functions. These settings would be like using the flags in the command line but it will be applied every time a react component is made.
@@ -285,8 +281,6 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
 </table>
 
 ## Templating
-
----
 
 ### Description
 
