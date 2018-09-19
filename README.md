@@ -230,12 +230,6 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
     </thead>
     <tbody>
         <tr>
-            <td>test</td>
-            <td>Boolean</td>
-            <td>true</td>
-            <td>Include a testing file for the component(s) you create</td>
-        </tr>
-        <tr>
             <td>css</td>
             <td>Boolean</td>
             <td>true</td>
@@ -252,6 +246,12 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
             <td>Boolean</td>
             <td>true</td>
             <td>Include  default packages for react</td>
+        </tr>
+        <tr>
+            <td>test</td>
+            <td>Boolean</td>
+            <td>false</td>
+            <td>Include a testing file for the component(s) you create</td>
         </tr>
         <tr>
             <td>verbose</td>
@@ -391,7 +391,7 @@ propertys:
         <tr>
             <td>ext</td>
             <td>String</td>
-            <td>Extentiom type for the current file.(no dot included)</td>
+            <td>Extentiom type for the current file(no dot included)</td>
         </tr>
     </tbody>
 </table>
@@ -558,7 +558,7 @@ Review the [Env options](#env-options-file) section to see all possible property
 Example: Edit `component/component.dot` to render a component that doesn't include any react lifecycle methods always uses the constructor function. Now your file should look like this:
 
     import React, { Component } from 'react';
-    {{? it.component.useCSS }}
+    {{? it.settings.css }}
     import './{{= it.component.name }}.css';
     {{?}}
 

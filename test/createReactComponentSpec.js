@@ -16,8 +16,9 @@ const settings = [
   { flag: ['-c', 'less'], files: ['App.js', 'App.less', 'index.js'] },
   { flag: ['-i'], files: ['App.js', 'App.css'] },
   { flag: ['-f'], files: ['App.css', 'App.js'] },
-  { flag: ['-n'], files: ['App.js', 'index.js'] },
-  { flag: ['-d'], files: [] }
+  { flag: ['-s'], files: ['App.js', 'index.js'] },
+  { flag: ['-d'], files: [] },
+  { flag: ['-t'], files: ['App.js', 'App.less', 'index.js', 'App.test.js'] }
 ];
 
 const test = false;
@@ -80,7 +81,7 @@ describe('Create React Component', function() {
       )}) should render the correct files`, function(done) {
         spawn(['create'].concat(setting.flag, 'App'), function(err) {
           if (err) {
-            console.log(err);
+            return done(err);
           }
           checkFilesExists(cwd, ['App'], setting.files, done);
         });
@@ -104,7 +105,7 @@ function spawn(args, done) {
       test && console.log('err:', err);
       test && console.log('stdout:', stdout);
       test && console.log('stderr:', stderr);
-      done(err);
+      done(err || stderr);
     }
   );
 }

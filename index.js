@@ -22,6 +22,7 @@ try {
   var localSettings = fs.readJsonSync(path.join(CWD, '.ccr', 'settings.json'));
 
   settings.import(localSettings);
+  // console.log(settings);
 } catch (e) {
   settings.get('verbose') &&
     console.log(
