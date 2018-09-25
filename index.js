@@ -9,14 +9,9 @@ const settings = require('./lib/settings');
 const fs = require('fs-extra');
 const path = require('path');
 
-const CWD = process.cwd();
+const utils = require('./lib/utils');
 
-function optionsToSettings(_program) {
-  _program.options.forEach(function(option) {
-    var prop = option.attributeName();
-    settings.set(prop, _program[prop], true);
-  });
-}
+const CWD = process.cwd();
 
 try {
   var localSettings = fs.readJsonSync(path.join(CWD, '.ccr', 'settings.json'));
@@ -52,11 +47,12 @@ program
 
 program
   .command('create <components...>')
-  .option('-v, --verbose', 'logs')
+  .option('-v, --verbose', 'logs', false)
   .option('-c, --css-type <ext>', 'change extention for css file', 'css')
   .option(
     '-f, --functional',
-    'Use functional component instead of a state component'
+    'Use functional component instead of a state component',
+    false
   )
   .option(
     '-i, --no-index',
@@ -75,12 +71,14 @@ program
   .option(
     '-p, --packages <packages>',
     'A path to add on to your current working directory'
-    // packages => (packages ? packages.split(':') : [])
   )
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    console.log('packages', options.packages);
+    console.log('css', options.css);
+
+    deleteDefaultBoolFlags(options);
+
     optionsToSettings(options);
     createReactComponents(CWD, files);
   });
@@ -93,3 +91,30 @@ program
 program.parse(process.argv);
 
 optionsToSettings(program);
+
+/*
+ * Helper Functions
+*/
+
+/*
+ * Deletes the property from commander with flags 
+ * that have: ( --no-* ) so that it doesnt override
+ * settings from users style sheet
+*/
+function deleteDefaultBoolFlags(options) {
+  options.options.forEach(function(option) {
+    const prop = option.attributeName();
+    const isBoolFlag = /^--no/.test(option.long) || utils.isBool(options[prop]);
+
+    if (isBoolFlag) {
+      options[prop] = undefined;
+    }
+  });
+}
+
+function optionsToSettings(_program) {
+  _program.options.forEach(function(option) {
+    var prop = option.attributeName();
+    settings.set(prop, _program[prop], true);
+  });
+}
