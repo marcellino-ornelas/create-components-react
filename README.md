@@ -394,7 +394,9 @@ Example:
 
     react-component create -p storage:view:container App
 
-This command will Create App with a custom storage, view, and container package included.
+This command will Create an App component with custom storage, view, and container packages.
+
+> Note: Review [custom packages](#custom-package-example) to see more examples
 
 <br>
 
@@ -627,6 +629,10 @@ This doesn't look to different than the default version right? Don't be disappoi
 
 This is the code we have just editted in `.ccr/templates/component/component.dot`. You can edit to file however you want to fit your needs while developing with react.
 
+<span id="custom-package-example"></span>
+
+#### Custom Packages
+
 To add your own custom packages. Create a folder inside the `templates/` folder. The name can be anything you want but its important to remember that this name is what the package is gonna be called.
 
 In this example we are going to create a `storage` package that will help us create a mobx store. Create A folder called `storage`. Next create a file called `storage.dot`.
@@ -649,7 +655,7 @@ Inside of `storage/storage.dot` add the following code.
 
     const
 
-To create a component with our additional package. Execute this line in your command line.
+now create a component with our additional package. Execute this line in your command line.
 
     react-component create -p storage App
 
