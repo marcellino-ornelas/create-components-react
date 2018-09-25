@@ -388,6 +388,14 @@ Example to create a css file: `someFileName.css.dot`
 
 > Note: The `-c` flag in create will replace the extention for all `.css` files. If you want all your css files from `css` to `sass` or `less` files change it with the `-c` flag or change it in the `settings.json` file under `cssType`.
 
+To use custom packages use the `-p` flag while creating a component. The `-p` or `--packages` flag takes a colon separated list of package names.
+
+Example:
+
+    react-component create -p storage:view:container App
+
+This command will Create App with a custom storage, view, and container package included.
+
 <br>
 
 > Review Create flags section for a full list of all flags.
@@ -467,8 +475,8 @@ open `component/component.dot` and you should see something like this.
 
 There is some special syntax on this file that doesnt look familiar.
 
-    {{? it.component.useCSS }}
-    import './{{= it.component.name }}.css';
+    {{? it.settings.css }}
+    import './{{= it.component.name }}.{{= it.settings.cssType}}';
     {{?}}
 
 or
@@ -570,7 +578,7 @@ Example: Edit `component/component.dot` to render a component that doesn't inclu
 
     import React, { Component } from 'react';
     {{? it.settings.css }}
-    import './{{= it.component.name }}.css';
+    import './{{= it.component.name }}.{{= it.settings.cssType}}';
     {{?}}
 
     class {{= it.component.name}} extends Component {
@@ -596,11 +604,12 @@ Now when you execute `react-components create App` it should make a directory li
     | _ App/
         | - App.js
         | - index.js
-        | - style.css
+        | - App.css
 
 This doesn't look to different than the default version right? Don't be disappointed too quickly. Let's take a look at `App.js`. This file is created from the `component/component.dot` so if we have all our configurations right, it should now look like this:
 
     import React, { Component } from 'react';
+    import './App.css';
 
     class App extends Component {
       constructor(props){
@@ -617,6 +626,41 @@ This doesn't look to different than the default version right? Don't be disappoi
     export default App;
 
 This is the code we have just editted in `.ccr/templates/component/component.dot`. You can edit to file however you want to fit your needs while developing with react.
+
+To add your own custom packages. Create a folder inside the `templates/` folder. The name can be anything you want but its important to remember that this name is what the package is gonna be called.
+
+In this example we are going to create a `storage` package that will help us create a mobx store. Create A folder called `storage`. Next create a file called `storage.dot`.
+
+    RepoFolder/
+    | - .ccr/
+        | - templates/
+            | - component/
+            | - index/
+            | - functional/
+            | - style/
+            | - test/
+            |
+            | - storage/
+            |   |- storage.dot
+            |
+            | - settings.json
+
+Inside of `storage/storage.dot` add the following code.
+
+    const
+
+To create a component with our additional package. Execute this line in your command line.
+
+    react-component create -p storage App
+
+This will create:
+
+    App/
+    |
+    | - App.js
+    | - App.css
+    | - index.js
+    | - storage.js
 
 <!-- ## Create
 CAC DSV
