@@ -359,7 +359,137 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
 
 ---
 
-### Env options
+### Packages
+
+    | - templates/
+        | - component/
+        |   | - component.dot
+        |
+        | - index/
+        |   | - index.dot
+        |
+        | - functional/
+        |   | - functional.dot
+        |
+        | - style/
+        |   | - style.css.dot
+        |
+        | - test/
+        |   | - test.test.js.dot
+        |
+        | - settings.json
+
+Lets give you some basic info on how templating works. When you initialize templating in create-components-react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
+
+You also are allowed to add your own packages to use throughout the repo. These packages can have directories and/or dot files for rendering inside. each directory( even nested ones!) and all files will be made to the destination. To add custom packages create a new folder inside `.ccr/templates`. The name of the folder will be the package name. Inside your custom package folder create a file(s) and/or directory(s). Each file inside that you would like to have rendered with templating should include a `.dot` extention at the end of the file.
+If the only extention to your file is a `.dot` extention then will be rendered as a `.js` file. If you would like to have another type of extention include it before the `.dot` extention.
+
+Example to create a css file: `someFileName.css.dot`
+
+> Note: The `-c` flag in create will replace the extention for all `.css` files. If you want all your css files from `css` to `sass` or `less` files change it with the `-c` flag or change it in the `settings.json` file under `cssType`.
+
+<br>
+
+> Review Create flags section for a full list of all flags.
+
+---
+
+### Examples
+
+Open your terminal and go to the directory that you wish to use.
+
+    cd path/to/repoFolder/
+
+Initialize Settings and Templates
+
+    react-component init -t
+
+or this if you have settings already initialized.
+
+    react-component template
+
+This will create:
+
+    RepoFolder/
+    | - .ccr/
+        | - templates/
+            | - component/
+            |   | - component.dot
+            |
+            | - index/
+            |   | - index.dot
+            |
+            | - functional/
+            |   | - functional.dot
+            |
+            | - style/
+            |   | - style.css.dot
+            |
+            | - test/
+            |   | - test.test.js.dot
+            |
+            | - settings.json
+
+open `component/component.dot` and you should see something like this.
+
+    import React, { Component } from 'react';
+    {{? it.settings.css }}
+    import './{{= it.component.name }}.{{= it.settings.cssType}}';
+    {{?}}
+
+    class {{= it.component.name}} extends Component {
+      // constructor(props){
+        // super(props);
+        // this.state = {};
+      // }
+
+      // componentWillMount(){}
+      // componentDidMount(){}
+      // componentWillUnmount(){}
+
+      // componentWillReceiveProps(){}
+      // shouldComponentUpdate(){}
+      // componentWillUpdate(){}
+      // componentDidUpdate(){}
+
+      render() {
+        return (
+          <div></div>
+        );
+      }
+    }
+
+    export default {{= it.component.name}};
+
+> Note: All templates in the `.ccr/templates` folder are the default templates for create-components-react.
+
+`component/component.dot` is the default template to make each component file. You can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can use the `create` command and each component created will take on the look of the template file you updated.
+
+There is some special syntax on this file that doesnt look familiar.
+
+    {{? it.component.useCSS }}
+    import './{{= it.component.name }}.css';
+    {{?}}
+
+or
+
+    {{= it.component.name}}
+
+This is doT snytax. The first example is a example of a conditional in doT and the second one is interpolation. I recommend to review the doT documentation <a href="http://olado.github.io/doT/index.html" target="_blank">here</a> to see how to use this correctly this templating engine. The next thing that is unfamiliar is:
+
+      it.component.name
+
+Every file that gets rendered we give you configuration and enviroment settings to let you customize your files anyway you would like.
+
+The top level element is always `it`.
+
+There are three main variables that will be important for you to use. The three are:
+
+-   [File](#env-options-file) -> `it.file`
+-   [Component](#env-options-component) -> `it.component`
+-   [Settings](#setting-options) -> `it.settings`
+
+Here are all the possible env options you have
 
 #### File
 
@@ -435,125 +565,6 @@ usage:
 propertys:
 
 The properties here are the same as the ones you can use in [settings options section](#setting-options)
-
----
-
-### Packages
-
-    | - templates/
-        | - component/
-        |   | - component.dot
-        |
-        | - index/
-        |   | - index.dot
-        |
-        | - style/
-        |   | - style.css.dot
-        |
-        | - settings.json
-
-Lets give you some basic info on how templating works. When you initialize templating in create-components-react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
-
-You also are allowed to add your own packages to use throughout the repo. These packages can have directories and/or dot files for rendering inside. each directory( even nested ones!) and all files will be made to the destination. To add custom packages create a new folder inside `.ccr/templates`. The name of the folder will be the package name. Inside your custom package folder create a file(s) and/or directory(s). Each file inside that you would like to have rendered with templating should include a `.dot` extention at the end of the file.
-If the only extention to your file is a `.dot` extention then will be rendered as a '.js' file. If you would like to have another type of extention include it before the `.dot` extention.
-
-Example to create a css file: `someFileName.css.dot`
-
-> Note: The `-c` flag in create will replace the extention for all `.css` files.
-
-> Review Create flags section for a full list of all flags.
-
----
-
-### Examples
-
-Open your terminal and go to the directory that you wish to use.
-
-    cd path/to/repoFolder/
-
-Initialize Settings and Templates
-
-    react-component init -t
-
-or this if you have settings already initialized.
-
-    react-component template
-
-This will create:
-
-    RepoFolder/
-    | - .ccr/
-        | - templates/
-            | - component/
-            |   | - component.dot
-            |
-            | - index/
-            |   | - index.dot
-            |
-            | - style/
-            |   | - style.css.dot
-            |
-            | - settings.json
-
-open `component/component.dot` and you should see something like this.
-
-    import React, { Component } from 'react';
-    {{? it.component.useCSS }}
-    import './{{= it.component.name }}.css';
-    {{?}}
-
-    class {{= it.component.name}} extends Component {
-      // constructor(props){
-        // super(props);
-        // this.state = {};
-      // }
-
-      // componentWillMount(){}
-      // componentDidMount(){}
-      // componentWillUnmount(){}
-
-      // componentWillReceiveProps(){}
-      // shouldComponentUpdate(){}
-      // componentWillUpdate(){}
-      // componentDidUpdate(){}
-
-      render() {
-        return (
-          <div></div>
-        );
-      }
-    }
-    export default {{= it.component.name}};
-
-> Note: All templates in the `.ccr/templates` folder are the default templates for create-components-react.
-
-`component/component.dot` is the default template to make each component file. You can edit this file to make it look like anything you want as long as you follow the rules of javascript and doT. After you update this file and save it you can use the `create` command and each component created will take on the look of the template file you updated.
-
-There is some special syntax on this file that doesnt look familiar.
-
-    {{? it.component.useCSS }}
-    import './{{= it.component.name }}.css';
-    {{?}}
-
-or
-
-    {{= it.component.name}}
-
-This is doT snytax. The first example is a example of a conditional in doT and the second one is interpolation. I recommend to review the doT documentation <a href="http://olado.github.io/doT/index.html" target="_blank">here</a> to see how to use this correctly this templating engine. The next thing that is unfamiliar is:
-
-      it.component.name
-
-Every file that gets rendered we give you configuration and enviroment settings to let you customize your files anyway you would like.
-
-The top level element is always `it`.
-
-There are three main variables that will be important for you to use. The three are:
-
--   [File](#env-options-file) -> `it.file`
--   [Component](#env-options-component) -> `it.component`
--   [Settings](#setting-options) -> `it.settings`
-
-Review the [Env options](#env-options-file) section to see all possible propertys for these objects.
 
 Example: Edit `component/component.dot` to render a component that doesn't include any react lifecycle methods always uses the constructor function. Now your file should look like this:
 
