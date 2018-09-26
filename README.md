@@ -81,39 +81,40 @@ This will create a react component folder that will include a `<ComponentName>.j
 `react-component create App` will create an App component folder in your current working directory
 
     App/
-    |--- App.js
+    | - App.js
     |
-    |--- App.css
+    | - App.css
     |
-    |--- index.js
+    | - index.js
 
 If you would like a component to be a child of another component put a path to the folder of the parent component first followed by the child component after. `react-component create <ParentFolder>/<ChildComponent>` will create a child component in the parent folder.
 
 `react-component create Nav/NavItem` will create a NavItem component inside the nav folder.
 
     Nav/
-    | -- NavItem/
+    | - NavItem/
         |
-        |--- NavItem.js
+        | - NavItem.js
         |
-        |--- NavItem.css
+        | - NavItem.css
         |
-        |--- index.js
+        | - index.js
 
 If Nav was a component already then it would look like this.
 
     Nav/
-    |--- index.js
-    |--- Nav.js
-    |--- Nav.css
+    | - index.js
     |
-    | -- NavItem/
+    | - Nav.js
+    |
+    | - Nav.css
+    |
+    | - NavItem/
+        | - NavItem.js
         |
-        |--- NavItem.js
+        | - NavItem.css
         |
-        |--- NavItem.css
-        |
-        |--- index.js
+        | - index.js
 
 > Note: Parent folder(s) will be created if they dont exist. This will not make the parent folder a component.
 
@@ -122,29 +123,27 @@ You can also chain components names `react-component <ComponentName> <ComponentN
     react-component create Nav/NavItem SideBar SideBar/SideBarItem
 
     Nav/
-    | -- NavItem/
-    |  |
-    |  |--- NavItem.js
-    |  |
-    |  |--- NavItem.css
-    |  |
-    |  |--- index.js
+    | - NavItem/
+    |    | - NavItem.js
+    |    |
+    |    | - NavItem.css
+    |    |
+    |    | - index.js
     |
+
     sideBar/
+    | - SideBar.js
     |
-    |-- SideBar.js
+    | - SideBar.css
     |
-    |-- SideBar.css
+    | - index.js
     |
-    |-- index.js
-    |
-    | -- SideBarItem/
-        |
-        |--- SideBarItem.js
-        |
-        |--- SideBarItem.css
-        |
-        |--- index.js
+    | - SideBarItem/
+          | - SideBarItem.js
+          |
+          | - SideBarItem.css
+          |
+          | - index.js
 
 ---
 
@@ -362,22 +361,22 @@ The doT templating language uses `{{}}` for inertoplation and javascript executi
 ### Packages
 
     | - templates/
-        | - component/
-        |   | - component.dot
-        |
-        | - index/
-        |   | - index.dot
-        |
-        | - functional/
-        |   | - functional.dot
-        |
-        | - style/
-        |   | - style.css.dot
-        |
-        | - test/
-        |   | - test.test.js.dot
-        |
-        | - settings.json
+          | - component/
+          |     | - component.dot
+          |
+          | - index/
+          |     | - index.dot
+          |
+          | - functional/
+          |     | - functional.dot
+          |
+          | - style/
+          |     | - style.css.dot
+          |
+          | - test/
+          |     | - test.test.js.dot
+          |
+          | - settings.json
 
 Lets give you some basic info on how templating works. When you initialize templating in create-components-react, every folder that is a direct child of `.ccr/templates/` are called packages. Create-components-react uses the content of these folders to render your component. The default packages for react are `index, component, style` these will be include everytime you create a component structure unless you specify in the local settings or command-line that you would not like to include these packages.
 
@@ -629,6 +628,12 @@ This doesn't look to different than the default version right? Don't be disappoi
 
 This is the code we have just editted in `.ccr/templates/component/component.dot`. You can edit to file however you want to fit your needs while developing with react.
 
+<span id="default-packages-example"></span>
+
+#### Default Packages
+
+As mentioned earlier create-components-react has default packages that
+
 <span id="custom-package-example"></span>
 
 #### Custom Packages
@@ -655,7 +660,7 @@ Inside of `storage/storage.dot` add the following code.
 
     const
 
-now create a component with our additional package. Execute this line in your command line.
+Now create a component with our additional package. Execute this line in your command line.
 
     react-component create -p storage App
 
