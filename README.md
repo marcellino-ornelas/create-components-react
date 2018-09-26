@@ -232,25 +232,25 @@ This will create a `.ccr/` folder with `settings.json` file inside it.
             <td>css</td>
             <td>Boolean</td>
             <td>true</td>
-            <td>Include a css file for the component(s) you create</td>
+            <td> Include a css file for the component(s) you create</td>
         </tr>
         <tr>
             <td>index</td>
             <td>Boolean</td>
             <td>true</td>
-            <td>Include a index file for the component(s) you create</td>
+            <td> Include a index file for the component(s) you create</td>
         </tr>
         <tr>
             <td>default</td>
             <td>Boolean</td>
             <td>true</td>
-            <td>Include  default packages for react</td>
+            <td> Include all of the default packages for react. index, css, and component or functional </td>
         </tr>
         <tr>
             <td>test</td>
             <td>Boolean</td>
             <td>false</td>
-            <td>Include a testing file for the component(s) you create</td>
+            <td> Include a testing file for the component(s) you create</td>
         </tr>
         <tr>
             <td>verbose</td>
