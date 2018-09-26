@@ -58,7 +58,10 @@ program
     "Don't include default index file for the components you create"
   )
   .option('-s, --no-css', "Don't include a css for the component(s) you create")
-  .option('-d, --no-default', 'change extention for css file', 'css')
+  .option(
+    '-d, --no-default',
+    "Don't include any of the default packages for react.(index, style, component or functional)"
+  )
   .option(
     '-t, --test',
     'Include a testing file for the component(s) you create'
@@ -74,11 +77,12 @@ program
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    console.log('css', options.css);
+    // console.log('options', options.options);
+    // console.log('default', options.default);
 
     deleteDefaultBoolFlags(options);
-
     optionsToSettings(options);
+
     createReactComponents(CWD, files);
   });
 
@@ -105,7 +109,7 @@ function deleteDefaultBoolFlags(options) {
     const prop = option.attributeName();
     const isBoolFlag = /^--no/.test(option.long) || utils.isBool(options[prop]);
 
-    if (isBoolFlag) {
+    if (isBoolFlag && option[prop]) {
       options[prop] = undefined;
     }
   });
