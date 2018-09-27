@@ -69,38 +69,7 @@ describe('Templates', function() {
       fs.remove(TEMPLATES_DEST_PATH, done);
     });
 
-    it('should render the correct number of files with no react adapter', function(done) {
-      // Make the files with there paths for each component
-      checkFilesExists(
-        TEMPLATES_DEST_PATH,
-        testingComponents,
-        ['index.js', 'component.js', 'style.css'],
-        done
-      );
-    });
-  });
-
-  describe('adapter', function() {
-    before(function(done) {
-      template.adapter(reactAdapter(settings._config).process);
-
-      const component = new Component(TEMPLATES_DEST_PATH, 'App');
-
-      template.render(
-        component.dir,
-        {
-          settings: settings._config,
-          component: component
-        },
-        done
-      );
-    });
-
-    after(function(done) {
-      fs.remove(TEMPLATES_DEST_PATH, done);
-    });
-
-    it('should render the correct number of files with react adapter', function(done) {
+    it('should render the correct number of files', function(done) {
       // Make the files with there paths for each component
       checkFilesExists(
         TEMPLATES_DEST_PATH,
@@ -109,7 +78,7 @@ describe('Templates', function() {
         done
       );
     });
-  }); // plugins
+  });
 }); // Templates
 
 function makeComponentFiles(dest, components, files) {

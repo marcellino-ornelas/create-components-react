@@ -59,7 +59,7 @@ This will create a react component folder that will include a `<ComponentName>.j
         <tr>
             <td>-d, --no-default</td>
             <td>false</td>
-            <td>Don't include any of the default packages for react. This is the same as saying <code>react-component create -i</code></td>
+            <td>Don't include any of the default packages for react. index, style, component or functional</td>
         </tr> 
         <tr>
             <td>-t, --test</td>
