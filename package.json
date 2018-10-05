@@ -9,7 +9,7 @@
   },
   "author": "Marcellino Ornelas",
   "bin": {
-    "react-component": "./index.js"
+    "ccr": "./index.js"
   },
   "license": "ISC",
   "engines": {
