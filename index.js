@@ -26,7 +26,7 @@ try {
 
 const createReactComponents = require('./lib');
 
-program.version('2.0.3');
+program.version('2.0.4');
 
 program
   .command('init')
@@ -34,6 +34,7 @@ program
     '-t, --templates',
     'Configure this repo to use template functionality'
   )
+  .alias('i')
   .description('create local configuration settings for a repo to use')
   .action(function(options) {
     var initProgress = createReactComponents.initializeLocalSettings(CWD);
@@ -42,6 +43,14 @@ program
       settings.set('templates', true);
       initProgress.then(createReactComponents.initializeTemplates(CWD));
     }
+  });
+
+program
+  .command('template')
+  .alias('t')
+  .description('initalize templating')
+  .action(function(options) {
+    createReactComponents.initializeTemplates(CWD);
   });
 
 program
@@ -77,23 +86,13 @@ program
   .alias('c')
   .description('create a new component')
   .action(function(files, options) {
-    // console.log('options', options.options);
-    // console.log('default', options.default);
-
     deleteDefaultBoolFlags(options);
     optionsToSettings(options);
 
     createReactComponents(CWD, files);
   });
 
-// program.command('* <components...>').action(function(files, options) {
-//   optionsToSettings(options);
-//   createReactComponents(CWD, files);
-// });
-
 program.parse(process.argv);
-
-optionsToSettings(program);
 
 /*
  * Helper Functions
