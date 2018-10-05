@@ -1,7 +1,3 @@
-<style type="text/css">
-    table tr td:nth-last-child(1), table tr th:nth-last-child(1) {width:50%;}
-</style>
-
 # Create Components react
 
 Create components react generates react component folder(s).
