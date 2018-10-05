@@ -26,7 +26,7 @@ try {
 
 const createReactComponents = require('./lib');
 
-program.version('2.0.4');
+program.version('2.1.0');
 
 program
   .command('init')
