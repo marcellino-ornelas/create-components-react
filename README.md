@@ -1,3 +1,7 @@
+<style type="text/css">
+    table tr td:nth-last-child(1), table tr th:nth-last-child(1) {width:50%;}
+</style>
+
 # Create Components react
 
 Create components react generates react component folder(s).
@@ -32,44 +36,57 @@ This will create a react component folder that will include a default of `<Compo
 
 ### Flags
 
-<table>
+<table id="create-table">
     <thead>
         <tr>
-            <th>Flag</th>
+            <th>Short Flag</th>
+            <th>Long Flag</th>
             <th>Default</th>
             <th>Description</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>-c, --css-type <ext> </td>
+            <td>-c &lt;ext&gt; </td>
+            <td>--css-type &lt;ext&gt;</td>
             <td>css</td>
             <td>Change extension for css file</td>
         </tr>
         <tr>
-            <td>-s, --no-css</td>
+            <td>-s</td>
+            <td>--no-css</td>
             <td>false</td>
             <td>Don't include a css file for the component(s) you create</td>
         </tr>
         <tr>
-            <td>-i, --no-index</td>
+            <td>-i</td>
+            <td>--no-index</td>
             <td>false</td>
             <td>Don't include a index file for the component(s) you create</td>
         </tr>
         <tr>
-            <td>-d, --no-default</td>
+            <td>-d</td>
+            <td>--no-default</td>
             <td>false</td>
             <td>Don't include any of the default packages for react. (index, style, component or functional) This will create a empty folder if not used with other commands</td>
         </tr> 
         <tr>
-            <td>-t, --test</td>
+            <td>-t</td>
+            <td>--test</td>
             <td>false</td>
             <td>Include a test file for the component(s) you create</td>
         </tr>        
         <tr>
-            <td>-r, --extend-cwd <path></td>
+            <td>-r &lt;path&gt;</td>
+            <td>--extend-cwd &lt;path&gt;</td>
             <td></td>
             <td>Path to extend your current working directory path</td>
+        </tr>
+        <tr>
+            <td>-p &lt;packages...&gt;</td>
+            <td>--packages &lt;packages...&gt;</td>
+            <td></td>
+            <td>Colon separated list of additional packages to include while generating you component</td>
         </tr>
     </tbody>
 </table>
@@ -254,7 +271,7 @@ create-components-react gives you the capability to make localized settings for 
             <td>extendCwd</td>
             <td>String</td>
             <td></td>
-            <td>Path to place your components. This path will be added to your current working directory</td>
+            <td>Path to place your components. This path should be relative to the folder where you initalized your settings</td>
         </tr>
         <tr>
             <td>verbose</td>
@@ -373,6 +390,14 @@ propertys:
         </tr>
     </tbody>
 </table>
+
+#### Packages
+
+usage:
+
+    it.packages
+
+This object holds the package names that are used while creating you component. For example if you added a custom package called `storage` and created a component like this `ccr create -p storage App`, `it.packages.storage` will be `true` because you told the program to include the package storage.
 
 #### Setting
 
