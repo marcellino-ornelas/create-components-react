@@ -1,0 +1,13 @@
+{
+  "settings_path": "../settings.json",
+  "settings": {
+    "test": false,
+    "css": true,
+    "index":true,
+    "default": true,
+    "cssType": "css",
+    "templates": false,
+    "extendCwd": "",
+    "verbose": false
+  }
+}
