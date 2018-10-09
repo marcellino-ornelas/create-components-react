@@ -88,6 +88,7 @@ program
   .action(function(files, options) {
     deleteDefaultBoolFlags(options);
     optionsToSettings(options);
+    console.log('settings', settings);
 
     createReactComponents(CWD, files);
   });
@@ -106,9 +107,9 @@ program.parse(process.argv);
 function deleteDefaultBoolFlags(options) {
   options.options.forEach(function(option) {
     const prop = option.attributeName();
-    const isBoolFlag = /^--no/.test(option.long) || utils.isBool(options[prop]);
+    const isBoolFlag = /^--no/.test(option.long);
 
-    if (isBoolFlag && option[prop]) {
+    if (isBoolFlag && options[prop]) {
       options[prop] = undefined;
     }
   });
