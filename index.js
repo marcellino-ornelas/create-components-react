@@ -88,7 +88,6 @@ program
   .action(function(files, options) {
     deleteDefaultBoolFlags(options);
     optionsToSettings(options);
-    console.log('settings', settings);
 
     createReactComponents(CWD, files);
   });
