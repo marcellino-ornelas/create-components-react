@@ -160,6 +160,33 @@ This line will create a Nav and SideBar component. Then it will create a SideBar
 
 ---
 
+You can use the --extend-cwd to place components into a specific  folder without changing your directory in the terminal. 
+
+cd path/to/project
+
+ccr create --extend-cwd ./client/src/components App
+
+this will place all of your components inside of ./client/src/components
+
+I use this feature but add the path to where my components live inside of my .ccr/settings.json
+file
+
+settings.json
+{
+  ...
+  extendCwd: './path/to/components',
+  ...
+}
+
+then you can use:
+
+ccr create App
+
+
+This will inherit the path from the settings.json file and place the App component into the path you specified.
+
+> Note: using --extend-cwd will overwite the path used in your settings.json file
+
 ### Tips
 
 create-components-react assumes that you want the first character of all paths to a component and the component's name to be uppercase. If you input a component name or any paths that have there first letter lowercase, it will be converted into uppercase. Examples:
