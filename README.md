@@ -4,7 +4,9 @@ Create components react generates react component folder(s).
 
 ### Install
 
-`npm install -g create-components-react`
+```bash
+npm install -g create-components-react
+```
 
 ## Create
 
@@ -18,7 +20,9 @@ This will create a react component folder that will include a default of `<Compo
 
 ### Syntax
 
-`ccr create [flags...] <ComponentName> [ComponentNames...]`
+```bash
+ccr create [flags...] <ComponentName> [ComponentNames...]
+```
 
 #### Parameters
 
@@ -187,9 +191,7 @@ settings.json
 
 ```json
 {
-    //...
     "extendCwd": "./path/to/components"
-    //...
 }
 ```
 
@@ -624,6 +626,7 @@ This is doT syntax for a conditional. This line will render the import statement
 
 Example: Edit `component/component.dot` to render a component that doesn't include any react lifecycle methods always uses the constructor function. Now your file should look like this:
 
+```javascript
     import React, { Component } from 'react';
     {{? it.settings.css }}
     import './{{= it.component.name }}.{{= it.settings.cssType}}';
@@ -642,6 +645,7 @@ Example: Edit `component/component.dot` to render a component that doesn't inclu
       }
     }
     export default {{= it.component.name}};
+```
 
 Now when you execute `ccr create App` it should make a directory like this:
 
@@ -656,22 +660,22 @@ Now when you execute `ccr create App` it should make a directory like this:
 
 This doesn't look to different than the default version right? Don't be disappointed too quickly. Let's take a look at `App.js`. This file is created from the `component/component.dot` so if we have all our configurations right, it should now look like this:
 
-    import React, { Component } from 'react';
-    import './App.css';
+```javascript
+import React, { Component } from 'react';
+import './App.css';
 
-    class App extends Component {
-      constructor(props){
+class App extends Component {
+    constructor(props) {
         super(props);
         this.state = {};
-      }
-
-      render() {
-        return (
-          <div></div>
-        );
-      }
     }
-    export default App;
+
+    render() {
+        return <div />;
+    }
+}
+export default App;
+```
 
 This is the code we have just editted in `.ccr/templates/component/component.dot`. You can edit to file however you want to fit your needs while developing with react.
 
@@ -724,6 +728,7 @@ In this example we are going to create a `storage` package that will help us cre
 
 Inside of `storage/{{= it.component.name }}Storage.dot` add the following code.
 
+```javascript
     import { observable } from "mobx"
 
     class {{= it.component.name  }}Storge {
@@ -732,6 +737,7 @@ Inside of `storage/{{= it.component.name }}Storage.dot` add the following code.
     }
 
     export default {{= it.component.name  }}Storge;
+```
 
 Now create a component with our additional package. Execute this line in your command line.
 
@@ -748,9 +754,11 @@ This will create:
 
 To get alittle more fancy we can change some behavior from other file when certain packages are used. Open `templates/component/{{= it.component.name }}.dot`. You can add this line inside your file to have dynamic capabilies when generating a component with a certain package.
 
+```javascript
     {{? it.packages.storage }}
     import {observer} from 'mobx-react';
     {{?}}
+```
 
 now when you call:
 
