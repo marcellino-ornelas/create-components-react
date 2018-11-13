@@ -91,7 +91,11 @@ This will create a react component folder that will include a default of `<Compo
 
 ### Examples
 
-`ccr create App` will create an App component folder in your current working directory
+Use the create command to create a component folder in your current working directory
+
+```bash
+ccr create App
+```
 
     App/
     | - App.js
@@ -102,7 +106,11 @@ This will create a react component folder that will include a default of `<Compo
 
 You can also specify a path to place the component. `ccr create path_to_folder/<ChildComponent>`.
 
-`ccr create Nav/NavItem` will create a NavItem component inside the nav folder.
+```bash
+ccr create Nav/NavItem
+```
+
+This will create a NavItem component inside the nav folder.
 
     Nav/
     | - NavItem/
@@ -133,7 +141,9 @@ If Nav was a component already then it would look like this.
 
 You can also create multiple components name at the same time `ccr <ComponentName> <ComponentName> <ComponentName>...`
 
-    ccr create Nav SideBar SideBar/SideBarItem
+```bash
+ccr create Nav SideBar SideBar/SideBarItem
+```
 
 This line will create a Nav and SideBar component. Then it will create a SideBarItem component that will be in the SideBar folder.
 
@@ -173,12 +183,13 @@ or
 
 Add the path to `.ccr/settings.json`
 
-```json
 settings.json
+
+```json
 {
-    ...
-    "extendCwd": "./path/to/components",
-    ...
+    //...
+    "extendCwd": "./path/to/components"
+    //...
 }
 ```
 
@@ -196,11 +207,15 @@ This will inherit the path from the settings.json file and place the App compone
 
 create-components-react assumes that you want the first character of all paths to a component and the component's name to be uppercase. If you input a component name or any paths that have there first letter lowercase, it will be converted into uppercase. Examples:
 
-    ccr create app
+```bash
+ccr create app
+```
 
 `app` will turn into `App`
 
-    ccr create nav/navItem
+```bash
+ccr create nav/navItem
+```
 
 `nav/navItem` will turn into `Nav/NavItem`
 
@@ -218,7 +233,9 @@ create-components-react gives you the capability to make localized settings for 
 
 ### Syntax
 
-    ccr init [flags...]
+```bash
+ccr init [flags...]
+```
 
 #### Parameters
 
@@ -316,11 +333,15 @@ create-components-react gives you the capability to make localized settings for 
 
 First navigate into the directory that you wish to initailize local settings.
 
-    cd some/path/to/repo
+```bash
+cd some/path/to/repo
+```
 
 Initailize create-component-react settings
 
-    ccr init
+```bash
+ccr init
+```
 
 This will create a `.ccr/` folder with `settings.json` file inside it.
 
@@ -443,21 +464,29 @@ The properties here are the same as the ones you can use in [settings options se
 
 To initailize templating, you can use:
 
-    ccr template
+```bash
+ccr template
+```
 
 > Note: This will only make templating folder to use. You still would need set the `templates` property in your `.ccr/settings.json` to true.
+
+```json
+{
+    //...
+    "templates": true
+    //...
+}
+```
+
 >
->        {
->            ...
->            templates: true,
->            ...
->        }
 
 This feature still relays on your local settings to work. It is recommended to initalize templating when initailizing settings. This command is here for those who have a old repo with create-components-react local settings already initailized and want to add templating.
 
 This is the recommended way to initailze templates if you don't have local settings initialized.
 
-    ccr init -t
+```bash
+ccr init -t
+```
 
 This will initialize local settings and local templating.
 
@@ -510,15 +539,21 @@ You also are allowed to add your own packages to use throughout the repo. For ex
 
 Open your terminal and go to the directory that you wish to use.
 
-    cd path/to/repoFolder/
+```bash
+cd path/to/repoFolder/
+```
 
 Initialize Settings and Templates
 
-    ccr init -t
+```bash
+ccr init -t
+```
 
 or this if you have settings already initialized.
 
-    ccr template
+```bash
+ccr template
+```
 
 This will create:
 
@@ -544,6 +579,7 @@ This will create:
 
 open `component/{{= it.component.name }}.dot` and you should see something like this.
 
+```javascript
     import React, { Component } from 'react';
     {{? it.settings.css }}
     import './{{= it.component.name }}.{{= it.settings.cssType}}';
@@ -572,6 +608,7 @@ open `component/{{= it.component.name }}.dot` and you should see something like 
     }
 
     export default {{= it.component.name}};
+```
 
 > Note: All templates in the `.ccr/templates` folder are the default templates for create-components-react.
 
@@ -659,7 +696,9 @@ To use custom packages use the `-p` flag while creating a component. The `-p` or
 
 Example:
 
-    ccr create -p storage:view:container App
+```bash
+ccr create -p storage:view:container App
+```
 
 This command will Create an App component with custom storage, view, and container packages.
 
@@ -715,7 +754,9 @@ To get alittle more fancy we can change some behavior from other file when certa
 
 now when you call:
 
-    ccr create -p storage Nav
+```bash
+ccr create -p storage Nav
+```
 
 Our nav component should have render the import statement for mobx.
 
