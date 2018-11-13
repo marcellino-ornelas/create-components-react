@@ -160,28 +160,33 @@ This line will create a Nav and SideBar component. Then it will create a SideBar
 
 ---
 
-You can use the --extend-cwd to place components into a specific  folder without changing your directory in the terminal. 
+You can use the `--extend-cwd` to place components into a specific folder without changing your directory in the terminal.
 
+```bash
 cd path/to/project
+ccr create --extend-cwd ./path/to/folder App
+```
 
-ccr create --extend-cwd ./client/src/components App
+This will place all of your components inside of the folder at `./client/src/components/`
 
-this will place all of your components inside of ./client/src/components
+or
 
-I use this feature but add the path to where my components live inside of my .ccr/settings.json
-file
+Add the path to `.ccr/settings.json`
 
+```json
 settings.json
 {
-  ...
-  extendCwd: './path/to/components',
-  ...
+    ...
+    "extendCwd": "./path/to/components",
+    ...
 }
+```
 
-then you can use:
+Then you can use:
 
+```bash
 ccr create App
-
+```
 
 This will inherit the path from the settings.json file and place the App component into the path you specified.
 
