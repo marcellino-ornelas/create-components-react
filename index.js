@@ -14,6 +14,11 @@ const utils = require('./lib/utils');
 const CWD = process.cwd();
 
 try {
+  /**
+   * User local setting
+   *
+   * Look at settings module './lib/settings'
+   */
   var localSettings = fs.readJsonSync(path.join(CWD, '.ccr', 'settings.json'));
 
   settings.import(localSettings);

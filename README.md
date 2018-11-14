@@ -185,7 +185,9 @@ This will place all of your components inside of the folder at `./client/src/com
 
 or
 
-Add the path to `.ccr/settings.json`
+Add the path to `.ccr/settings.json`.
+
+> Note: see [settings](#settings) section for more info about how to use `setting.json` file
 
 settings.json
 
