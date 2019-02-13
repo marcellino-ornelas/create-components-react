@@ -79,7 +79,7 @@ ccr create [flags...] <ComponentName> [ComponentNames...]
         <tr>
             <td>-f</td>
             <td>--functional</td>
-            <td></td>
+            <td>false</td>
             <td>Make the react component a function style component(component that has no state)</td>
         </tr>
         <tr>
