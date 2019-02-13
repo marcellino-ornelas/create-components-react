@@ -77,6 +77,12 @@ ccr create [flags...] <ComponentName> [ComponentNames...]
             <td>Include a test file for the component(s) you create</td>
         </tr>        
         <tr>
+            <td>-f</td>
+            <td>--functional</td>
+            <td></td>
+            <td>Make the react component a function style component(component that has no state)</td>
+        </tr>
+        <tr>
             <td>-r &lt;path&gt;</td>
             <td>--extend-cwd &lt;path&gt;</td>
             <td></td>
@@ -193,7 +199,7 @@ settings.json
 
 ```json
 {
-    "extendCwd": "./path/to/components"
+  "extendCwd": "./path/to/components"
 }
 ```
 
@@ -476,9 +482,9 @@ ccr template
 
 ```json
 {
-    //...
-    "templates": true
-    //...
+  //...
+  "templates": true
+  //...
 }
 ```
 
@@ -530,8 +536,8 @@ Example:
 
 There are two variables that you can use.
 
--   [Component](#env-options-component) -> `it.component`
--   [Settings](#setting-options) -> `it.settings`
+- [Component](#env-options-component) -> `it.component`
+- [Settings](#setting-options) -> `it.settings`
 
 You can file a list of all posssible propertys you can use [here](#env-settings).
 
@@ -667,14 +673,14 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    render() {
-        return <div />;
-    }
+  render() {
+    return <div />;
+  }
 }
 export default App;
 ```
