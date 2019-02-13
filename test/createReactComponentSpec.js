@@ -1,6 +1,6 @@
 /*
  * Node Modules
-*/
+ */
 
 const chai = require('chai');
 const path = require('path');
@@ -92,7 +92,7 @@ describe('Create React Component', function() {
 
 /*
  * Helper functions
-*/
+ */
 
 function spawn(args, done) {
   child.execFile(

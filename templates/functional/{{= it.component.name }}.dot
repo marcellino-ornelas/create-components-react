@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-{{? it.settings.css }}
-import './{{= it.component.name }}.css';
-{{?}}
+{{? it.settings.css }}import './{{= it.component.name }}.css';{{?}}
 
 const {{= it.component.name}} = (props) => {
   return (<div></div>);

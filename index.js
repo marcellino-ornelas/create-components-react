@@ -2,7 +2,7 @@
 
 /*
  * Create React Component
-*/
+ */
 
 const program = require('commander');
 const settings = require('./lib/settings');
@@ -61,11 +61,10 @@ program
 program
   .command('create <components...>')
   .option('-v, --verbose', 'logs', false)
-  .option('-c, --css-type <ext>', 'change extention for css file', 'css')
+  .option('-c, --css-type <ext>', 'change extention for css file')
   .option(
     '-f, --functional',
-    'Use functional component instead of a state component',
-    false
+    'Use functional component instead of a state component'
   )
   .option(
     '-i, --no-index',
@@ -101,13 +100,13 @@ program.parse(process.argv);
 
 /*
  * Helper Functions
-*/
+ */
 
 /*
- * Deletes the property from commander with flags 
+ * Deletes the property from commander with flags
  * that have: ( --no-* ) so that it doesnt override
  * settings from users style sheet
-*/
+ */
 function deleteDefaultBoolFlags(options) {
   options.options.forEach(function(option) {
     const prop = option.attributeName();

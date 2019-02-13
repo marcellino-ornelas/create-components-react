@@ -19,8 +19,9 @@
   "dependencies": {
     "async": "^2.6.0",
     "commander": "^2.15.1",
+    "dot": "^1.1.2",
     "filenamify": "^2.1.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^7.0.1",
     "is-valid-path": "^0.1.1",
     "ispromise": "^1.1.0",
     "valid-filename": "^2.0.1"
