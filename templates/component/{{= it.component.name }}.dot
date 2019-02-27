@@ -7,13 +7,10 @@ class {{= it.component.name}} extends Component {
     // this.state = {};
   // }
 
-  // componentWillMount(){}
   // componentDidMount(){}
   // componentWillUnmount(){}
 
-  // componentWillReceiveProps(){}
   // shouldComponentUpdate(){}
-  // componentWillUpdate(){}
   // componentDidUpdate(){}
 
   render() {
