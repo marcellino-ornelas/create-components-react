@@ -2,6 +2,20 @@
 
 Create components react generates react component folder(s).
 
+
+## 🚨 Deprecation notice!
+
+Dear users and contributors,
+
+We're thrilled to share some exciting news with you! After years of valuable support for `create-components-react`, we've decided to deprecate it in favor of [Templates](https://marcellino-ornelas.github.io/templates/). Templates is a versatile tool that goes beyond `create-components-react`, catering to a wide range of languages and frameworks. We truly appreciate your continued support and welcome your contributions to this new chapter!
+
+We will continue to fix bug and answer questions. however any new functionality will only be added to [Templates](https://marcellino-ornelas.github.io/templates/)
+
+Checkout the [coming from create components react guide](https://marcellino-ornelas.github.io/templates/docs/main/intro#coming-from-create-components-react) to help get you started.
+
+Thank you,
+Marcellino Ornelas
+
 ### Install
 
 ```bash
